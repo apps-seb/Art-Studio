@@ -34,14 +34,19 @@
 
     <style>
         body {
-            background-color: #EAE5DF; /* beige */
-            color: #0F3B2F; /* forest */
+            background-color: #EAE5DF;
+            color: #0F3B2F;
             overflow-x: hidden;
             cursor: none;
         }
         
+        /* Ocultar barra de scroll nativa */
         ::-webkit-scrollbar {
             display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
 
         /* Custom Cursor */
@@ -78,89 +83,50 @@
             opacity: 1;
         }
 
-        /* Utilidades de imagen general */
-        .img-wrap {
-            overflow: hidden;
-        }
+        .img-wrap { overflow: hidden; }
         .img-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            width: 100%; height: 100%; object-fit: cover;
             transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
         }
-        .img-hover-scale:hover img {
-            transform: scale(1.08);
-        }
+        .img-hover-scale:hover img { transform: scale(1.08); }
 
         /* Preloader */
         #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: #0F3B2F;
-            z-index: 9998;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background-color: #0F3B2F; z-index: 9998;
+            display: flex; justify-content: center; align-items: center;
         }
-        
         .logo-svg {
-            width: 150px;
-            height: 150px;
-            fill: transparent;
-            stroke: #C8A97E;
-            stroke-width: 1.5;
-            stroke-dasharray: 600;
-            stroke-dashoffset: 600;
+            width: 150px; height: 150px; fill: transparent;
+            stroke: #C8A97E; stroke-width: 1.5; stroke-dasharray: 600; stroke-dashoffset: 600;
         }
 
-        /* Estilos para la Galería 3D Premium (Swiper) */
-        .swiper-destacados {
-            width: 100%;
-            padding-top: 50px;
-            padding-bottom: 120px;
-            overflow: visible;
-        }
-
+        /* Swiper 3D (Obras Maestras) */
+        .swiper-destacados { width: 100%; padding-top: 50px; padding-bottom: 120px; overflow: visible; }
         .swiper-slide-art {
-            background-position: center;
-            background-size: cover;
-            width: 280px; 
-            height: 400px;
+            background-position: center; background-size: cover;
+            width: 280px; height: 400px;
             -webkit-box-reflect: below 5px linear-gradient(transparent, transparent, rgba(0,0,0,0.3));
-            transition: filter 0.5s ease;
-            filter: grayscale(80%) brightness(0.5);
+            transition: filter 0.5s ease; filter: grayscale(80%) brightness(0.5);
         }
-
-        @media (min-width: 768px) {
-            .swiper-slide-art {
-                width: 450px;
-                height: 600px;
-            }
-        }
-
-        .swiper-slide-active {
-            filter: grayscale(0%) brightness(1);
-        }
-
+        @media (min-width: 768px) { .swiper-slide-art { width: 450px; height: 600px; } }
+        .swiper-slide-active { filter: grayscale(0%) brightness(1); }
         .art-info {
-            position: absolute;
-            bottom: -90px;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            position: absolute; bottom: -90px; left: 0; width: 100%; text-align: center;
+            opacity: 0; transform: translateY(20px); transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
         }
+        .swiper-slide-active .art-info { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
 
-        .swiper-slide-active .art-info {
-            opacity: 1;
-            transform: translateY(0);
-            transition-delay: 0.3s;
-        }
+        /* 3D Stacking Cards (Exposiciones) */
+        .perspective-container { perspective: 1500px; }
+        .exhibition-card { position: sticky; top: 15vh; will-change: transform, opacity; }
+        .exhibition-inner { transform-style: preserve-3d; will-change: transform; }
+        .exhibition-img { transform: translateZ(-50px) scale(1.1); }
+        .exhibition-content { transform: translateZ(80px); }
+
+        /* Lienzo Canvas (Pinceladas) */
+        .brush-container { position: relative; cursor: crosshair; }
+        .brush-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; touch-action: none; }
     </style>
 </head>
 <body class="antialiased font-sans selection:bg-champagne selection:text-forest">
@@ -177,9 +143,9 @@
     <nav class="fixed top-0 w-full p-8 flex justify-between items-center z-50 mix-blend-difference text-beige">
         <div class="font-serif text-2xl tracking-widest">+ART</div>
         <div class="text-sm font-sans uppercase tracking-widest space-x-8 hidden md:block hover-target">
-            <a href="#estudio" class="hover:text-champagne transition-colors">Estudio</a>
+            <a href="#lienzo" class="hover:text-champagne transition-colors">Interactivo</a>
+            <a href="#archivo" class="hover:text-champagne transition-colors">Archivo</a>
             <a href="#destacados" class="hover:text-champagne transition-colors">Maestras</a>
-            <a href="#coleccion" class="hover:text-champagne transition-colors">Colección</a>
             <a href="#contacto" class="hover:text-champagne transition-colors">Contacto</a>
         </div>
     </nav>
@@ -189,7 +155,7 @@
 
             <section class="relative h-screen flex flex-col justify-center items-center overflow-hidden px-4 pt-20">
                 <div class="absolute inset-0 z-0 opacity-20">
-                    <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?q=80&w=2000&auto=format&fit=crop" alt="Background Texture" class="w-full h-full object-cover grayscale">
+                    <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?q=80&w=2000&auto=format&fit=crop" alt="Fondo" class="w-full h-full object-cover grayscale">
                 </div>
                 <div class="z-10 text-center">
                     <h1 class="font-serif text-6xl md:text-9xl text-forest tracking-tighter leading-none title-anim overflow-hidden">
@@ -211,7 +177,7 @@
                 </div>
             </section>
 
-            <section id="estudio" class="py-32 px-8 md:px-24 max-w-screen-2xl mx-auto flex flex-col md:flex-row items-center gap-16">
+            <section class="py-32 px-8 md:px-24 max-w-screen-2xl mx-auto flex flex-col md:flex-row items-center gap-16">
                 <div class="w-full md:w-1/2">
                     <h2 class="font-serif text-4xl md:text-6xl text-forest mb-8 reveal-text">
                         Nuestra filosofía reside en el silencio visual.
@@ -221,7 +187,72 @@
                     </p>
                 </div>
                 <div class="w-full md:w-1/2 relative h-[600px] img-wrap parallax-container">
-                    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=1000&auto=format&fit=crop" alt="Arte Escultórico" class="parallax-img">
+                    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=1000&auto=format&fit=crop" alt="Arte" class="parallax-img">
+                </div>
+            </section>
+
+            <section id="lienzo" class="relative w-full h-[80vh] bg-beige px-4 md:px-24 py-16 flex flex-col items-center">
+                <div class="text-center z-10 relative mb-12">
+                    <p class="font-sans text-forest text-xs tracking-[0.4em] uppercase reveal-text">Experiencia Táctil</p>
+                    <h2 class="font-serif text-4xl md:text-6xl text-forest reveal-text mt-2">Revela la Obra</h2>
+                </div>
+
+                <div class="w-full max-w-5xl h-full relative rounded-2xl overflow-hidden shadow-2xl brush-container cursor-swiper" id="brush-wrapper">
+                    <img src="https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?q=80&w=1600&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover z-0" alt="Obra Maestra">
+                    <div class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none" id="brush-hint">
+                        <h3 class="font-serif text-4xl text-champagne italic opacity-50 mix-blend-difference">Pasa el cursor o el dedo aquí</h3>
+                    </div>
+                    <canvas id="brushCanvas" class="brush-canvas"></canvas>
+                </div>
+            </section>
+
+            <section id="archivo" class="py-32 bg-forest text-beige overflow-hidden">
+                <div class="px-8 md:px-24 mb-16 flex justify-between items-end">
+                    <h2 class="font-serif text-5xl md:text-7xl">Archivo<br><span class="italic text-champagne">Continuo</span></h2>
+                    <p class="font-sans text-sm tracking-widest uppercase hidden md:block">Desliza para explorar</p>
+                </div>
+
+                <div class="flex overflow-x-auto gap-4 md:gap-8 px-8 md:px-24 pb-12 snap-x snap-mandatory no-scrollbar cursor-gallery">
+                    
+                    <div class="flex-none w-[85vw] md:w-[35vw] h-[60vh] md:h-[70vh] relative group snap-center rounded-xl overflow-hidden">
+                        <img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=800&auto=format&fit=crop" alt="Obra">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <span class="text-champagne font-serif text-4xl italic">01</span>
+                            <span class="font-sans text-sm tracking-widest uppercase mt-2">Materia Oscura</span>
+                        </div>
+                    </div>
+
+                    <div class="flex-none w-[85vw] md:w-[35vw] h-[60vh] md:h-[70vh] relative group snap-center rounded-xl overflow-hidden">
+                        <img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=800&auto=format&fit=crop" alt="Obra">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <span class="text-champagne font-serif text-4xl italic">02</span>
+                            <span class="font-sans text-sm tracking-widest uppercase mt-2">Eco de Luz</span>
+                        </div>
+                    </div>
+
+                    <div class="flex-none w-[85vw] md:w-[35vw] h-[60vh] md:h-[70vh] relative group snap-center rounded-xl overflow-hidden">
+                        <img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=800&auto=format&fit=crop" alt="Obra">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <span class="text-champagne font-serif text-4xl italic">03</span>
+                            <span class="font-sans text-sm tracking-widest uppercase mt-2">Líneas de Éter</span>
+                        </div>
+                    </div>
+
+                    <div class="flex-none w-[85vw] md:w-[35vw] h-[60vh] md:h-[70vh] relative group snap-center rounded-xl overflow-hidden">
+                        <img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://images.unsplash.com/photo-1583088580009-2d947c3e90a6?q=80&w=800&auto=format&fit=crop" alt="Obra">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <span class="text-champagne font-serif text-4xl italic">04</span>
+                            <span class="font-sans text-sm tracking-widest uppercase mt-2">Fluido Dorado</span>
+                        </div>
+                    </div>
+
+                    <div class="flex-none w-[85vw] md:w-[35vw] h-[60vh] md:h-[70vh] relative group snap-center rounded-xl overflow-hidden">
+                        <img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?q=80&w=800&auto=format&fit=crop" alt="Obra">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <span class="text-champagne font-serif text-4xl italic">05</span>
+                            <span class="font-sans text-sm tracking-widest uppercase mt-2">Pigmento Crudo</span>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -230,7 +261,7 @@
 
                 <div class="text-center z-10 relative mb-16 px-4">
                     <p class="font-sans text-champagne text-xs tracking-[0.3em] uppercase mb-4 reveal-text">Exhibición Privada</p>
-                    <h2 class="font-serif text-5xl md:text-7xl text-beige reveal-text">Obras Maestras</h2>
+                    <h2 class="font-serif text-5xl md:text-7xl text-beige reveal-text">Obras Maestras 3D</h2>
                 </div>
 
                 <div class="swiper swiper-destacados cursor-swiper">
@@ -253,56 +284,36 @@
                                 <p class="font-sans text-xs tracking-widest text-beige mt-2 uppercase">Técnica mixta</p>
                             </div>
                         </div>
-                        <div class="swiper-slide swiper-slide-art shadow-2xl" style="background-image: url('https://images.unsplash.com/photo-1557672172-298e090bd0f1?q=80&w=800&auto=format&fit=crop');">
-                            <div class="art-info">
-                                <h3 class="font-serif text-3xl text-champagne">Fractal</h3>
-                                <p class="font-sans text-xs tracking-widest text-beige mt-2 uppercase">Escultura digital</p>
-                            </div>
-                        </div>
-                        <div class="swiper-slide swiper-slide-art shadow-2xl" style="background-image: url('https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?q=80&w=800&auto=format&fit=crop');">
-                            <div class="art-info">
-                                <h3 class="font-serif text-3xl text-champagne">Resonancia</h3>
-                                <p class="font-sans text-xs tracking-widest text-beige mt-2 uppercase">Pigmentos naturales</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>
 
-            <section id="coleccion" class="py-32 bg-emerald text-beige">
-                <div class="px-8 md:px-24 mb-16 flex justify-between items-end">
-                    <h2 class="font-serif text-5xl md:text-7xl">Selección<br><span class="italic text-champagne">Premium</span></h2>
-                    <p class="font-sans text-sm tracking-widest uppercase hidden md:block">01 — 2026 Colección</p>
+            <section class="relative py-32 bg-beige text-forest perspective-container overflow-hidden">
+                <div class="text-center z-10 relative mb-24 px-4">
+                    <p class="font-sans text-champagne text-xs tracking-[0.3em] uppercase mb-4 reveal-text">Trayectoria</p>
+                    <h2 class="font-serif text-5xl md:text-7xl text-forest reveal-text">Exposiciones</h2>
                 </div>
-                
-                <div class="flex flex-col md:flex-row gap-8 px-8 md:px-24">
-                    <div class="w-full md:w-1/3 flex flex-col group gallery-item cursor-gallery">
-                        <div class="h-[500px] img-wrap img-hover-scale bg-forest">
-                            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=800&auto=format&fit=crop" alt="Obra 1">
-                        </div>
-                        <div class="mt-6 flex justify-between items-center border-b border-elegant pb-4 group-hover:border-champagne transition-colors">
-                            <span class="font-serif text-2xl">Líneas de Éter</span>
-                            <span class="font-sans text-xs tracking-widest text-champagne">Ver Detalles</span>
-                        </div>
-                    </div>
-                    
-                    <div class="w-full md:w-1/3 flex flex-col group gallery-item cursor-gallery mt-0 md:mt-24">
-                        <div class="h-[500px] img-wrap img-hover-scale bg-forest">
-                            <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=800&auto=format&fit=crop" alt="Obra 2">
-                        </div>
-                        <div class="mt-6 flex justify-between items-center border-b border-elegant pb-4 group-hover:border-champagne transition-colors">
-                            <span class="font-serif text-2xl">Materia Oscura</span>
-                            <span class="font-sans text-xs tracking-widest text-champagne">Ver Detalles</span>
+
+                <div class="max-w-5xl mx-auto px-4 relative pb-[10vh]">
+                    <div class="exhibition-card mb-[10vh]">
+                        <div class="exhibition-inner w-full h-[60vh] md:h-[70vh] rounded-3xl overflow-hidden shadow-2xl bg-forest relative flex flex-col justify-end p-8 md:p-16 hover-target cursor-gallery">
+                            <img src="https://images.unsplash.com/photo-1577083552431-6e5fd01988ec?q=80&w=1200&auto=format&fit=crop" alt="Bienal" class="absolute inset-0 w-full h-full object-cover opacity-60 exhibition-img">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                            <div class="relative z-10 exhibition-content text-beige">
+                                <span class="text-champagne font-serif text-4xl md:text-6xl italic">2026</span>
+                                <h3 class="font-sans text-2xl md:text-4xl font-light mt-2 tracking-widest">Bienal de Venecia</h3>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="w-full md:w-1/3 flex flex-col group gallery-item cursor-gallery mt-0 md:mt-12">
-                        <div class="h-[500px] img-wrap img-hover-scale bg-forest">
-                            <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=800&auto=format&fit=crop" alt="Obra 3">
-                        </div>
-                        <div class="mt-6 flex justify-between items-center border-b border-elegant pb-4 group-hover:border-champagne transition-colors">
-                            <span class="font-serif text-2xl">Eco de Luz</span>
-                            <span class="font-sans text-xs tracking-widest text-champagne">Ver Detalles</span>
+                    <div class="exhibition-card">
+                        <div class="exhibition-inner w-full h-[60vh] md:h-[70vh] rounded-3xl overflow-hidden shadow-2xl bg-forest relative flex flex-col justify-end p-8 md:p-16 hover-target cursor-gallery">
+                            <img src="https://images.unsplash.com/photo-1561214115-f1f11538638b?q=80&w=1200&auto=format&fit=crop" alt="MoMA" class="absolute inset-0 w-full h-full object-cover opacity-60 exhibition-img">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                            <div class="relative z-10 exhibition-content text-beige">
+                                <span class="text-champagne font-serif text-4xl md:text-6xl italic">2025</span>
+                                <h3 class="font-sans text-2xl md:text-4xl font-light mt-2 tracking-widest">MoMA, New York</h3>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -320,15 +331,6 @@
                     </form>
                 </div>
                 
-                <div class="mt-32 border-t border-elegant pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-sans tracking-widest uppercase text-elegant z-10 relative">
-                    <p>&copy; 2026 +Art Studio.</p>
-                    <div class="space-x-8 mt-4 md:mt-0">
-                        <a href="#" class="hover:text-champagne hover-target">Instagram</a>
-                        <a href="#" class="hover:text-champagne hover-target">Behance</a>
-                        <a href="#" class="hover:text-champagne hover-target">Artsy</a>
-                    </div>
-                </div>
-
                 <div class="absolute -bottom-10 left-0 w-full text-center opacity-5 pointer-events-none select-none">
                     <h1 class="font-serif text-[15vw] leading-none whitespace-nowrap">+ART STUDIO</h1>
                 </div>
@@ -345,140 +347,136 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // 1. Smooth Scroll (Lenis)
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            smooth: true,
-        });
-
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
+        // 1. Lenis Smooth Scroll
+        const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smooth: true });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
-
         lenis.on('scroll', ScrollTrigger.update);
-        gsap.ticker.add((time)=>{
-          lenis.raf(time * 1000);
-        });
+        gsap.ticker.add((time)=>{ lenis.raf(time * 1000); });
         gsap.ticker.lagSmoothing(0);
 
-        // 2. Custom Cursor Dinámico
+        // 2. Cursor Custom
         const cursor = document.getElementById('cursor');
         const root = document.documentElement;
-
         document.addEventListener('mousemove', (e) => {
-            gsap.to(cursor, {
-                x: e.clientX,
-                y: e.clientY,
-                duration: 0.1,
-                ease: "power2.out"
-            });
+            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1, ease: "power2.out" });
         });
 
-        // Hover en la Galería Normal (Texto: "Ver")
-        document.querySelectorAll('.cursor-gallery').forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                root.style.setProperty('--cursor-text', '"Ver"');
-                cursor.classList.add('cursor-hover');
+        const setupHover = (selector, text, scale) => {
+            document.querySelectorAll(selector).forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    if(text) { root.style.setProperty('--cursor-text', `"${text}"`); cursor.classList.add('cursor-hover'); }
+                    if(scale) gsap.to(cursor, {scale: scale, duration: 0.3});
+                });
+                item.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('cursor-hover');
+                    if(scale) gsap.to(cursor, {scale: 1, duration: 0.3});
+                });
             });
-            item.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
-        });
+        };
+        setupHover('.cursor-gallery', 'Ver', null);
+        setupHover('.cursor-swiper', 'Deslizar', null);
+        setupHover('.hover-target:not(.cursor-gallery)', '', 1.5);
 
-        // Hover en Swiper 3D (Texto: "Girar")
-        document.querySelectorAll('.cursor-swiper').forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                root.style.setProperty('--cursor-text', '"Girar"');
-                cursor.classList.add('cursor-hover');
-            });
-            item.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
-        });
-
-        // Hover en Enlaces y Botones (Agrandar sin texto)
-        document.querySelectorAll('.hover-target, a, button').forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                gsap.to(cursor, {scale: 1.5, duration: 0.3});
-            });
-            item.addEventListener('mouseleave', () => {
-                gsap.to(cursor, {scale: 1, duration: 0.3});
-            });
-        });
-
-        // 3. Preloader Animation
+        // 3. Preloader y Scroll Animaciones Generales
         window.addEventListener('load', () => {
             const tl = gsap.timeline();
             tl.to('.logo-svg', { strokeDashoffset: 0, duration: 2, ease: "power2.inOut" })
               .to('#logo-text', { opacity: 1, duration: 1, ease: "power1.inOut" }, "-=0.5")
               .to('#preloader', { yPercent: -100, duration: 1.2, ease: "expo.inOut", delay: 0.5 })
               .to('.title-anim span', { y: 0, duration: 1.2, stagger: 0.2, ease: "power4.out" }, "-=0.5")
-              .to('.fade-anim', { opacity: 1, duration: 1, ease: "power2.out" }, "-=0.8")
-              .to('.anim-line', { y: "100%", duration: 2, repeat: -1, ease: "power2.inOut" }, "-=1");
+              .to('.fade-anim', { opacity: 1, duration: 1, ease: "power2.out" }, "-=0.8");
         });
 
-        // 4. Animaciones de Scroll (Textos y Parallax)
         document.querySelectorAll('.reveal-text').forEach(text => {
-            gsap.fromTo(text, 
-                { opacity: 0, y: 30 },
-                {
-                    opacity: 1, y: 0, duration: 1, ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: text,
-                        start: "top 85%",
-                    }
-                }
-            );
+            gsap.fromTo(text, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: text, start: "top 85%" } });
         });
 
-        gsap.to('.parallax-img', {
-            yPercent: 20,
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".parallax-container",
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true
-            }
+        // 4. Swiper 3D y Stacking Cards
+        new Swiper('.swiper-destacados', { effect: 'coverflow', grabCursor: true, centeredSlides: true, slidesPerView: 'auto', loop: true, speed: 800, coverflowEffect: { rotate: 35, stretch: 0, depth: 250, modifier: 1, slideShadows: true }, autoplay: { delay: 4000, disableOnInteraction: false } });
+        
+        const exCards = gsap.utils.toArray('.exhibition-card');
+        exCards.forEach((card, i) => {
+            if (i === exCards.length - 1) return; 
+            gsap.to(card, { scale: 0.85, opacity: 0, rotationX: -15, transformOrigin: "top center", ease: "none", scrollTrigger: { trigger: exCards[i + 1], start: "top 80%", end: "top 20%", scrub: true } });
         });
 
-        // 5. Gallery Reveal
-        gsap.utils.toArray('.gallery-item').forEach((item) => {
-            gsap.fromTo(item, 
-                { opacity: 0, y: 100, clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)' },
-                {
-                    opacity: 1,
-                    y: 0,
-                    clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-                    duration: 1.5,
-                    ease: "power4.out",
-                    scrollTrigger: {
-                        trigger: item,
-                        start: "top 85%",
-                    }
-                }
-            );
-        });
+        // ==========================================
+        // 5. LÓGICA DEL LIENZO: PINCELADAS TÁCTILES
+        // ==========================================
+        const brushCanvas = document.getElementById('brushCanvas');
+        const brushCtx = brushCanvas.getContext('2d');
+        const wrapper = document.getElementById('brush-wrapper');
+        const hint = document.getElementById('brush-hint');
+        
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
 
-        // 6. Configuración de Swiper 3D Coverflow
-        const swiper = new Swiper('.swiper-destacados', {
-            effect: 'coverflow',
-            grabCursor: true,
-            centeredSlides: true,
-            slidesPerView: 'auto',
-            loop: true,
-            speed: 800,
-            coverflowEffect: {
-                rotate: 35,
-                stretch: 0,
-                depth: 250,
-                modifier: 1,
-                slideShadows: true,
-            },
-            autoplay: {
-                delay: 4000,
-                disableOnInteraction: false,
-            }
-        });
+        // Ajustar tamaño del canvas al contenedor
+        function resizeBrushCanvas() {
+            brushCanvas.width = wrapper.offsetWidth;
+            brushCanvas.height = wrapper.offsetHeight;
+            
+            // Llenar el canvas de color oscuro (Capa a borrar)
+            brushCtx.fillStyle = '#0F3B2F'; // Color Forest
+            brushCtx.fillRect(0, 0, brushCanvas.width, brushCanvas.height);
+            
+            // Preparar el "Pincel Borrador"
+            // destination-out hace que todo lo que dibujemos vuelva transparente el canvas
+            brushCtx.globalCompositeOperation = 'destination-out';
+            brushCtx.lineJoin = 'round';
+            brushCtx.lineCap = 'round';
+            brushCtx.lineWidth = 100; // Grosor de la pincelada
+            brushCtx.shadowBlur = 30; // Efecto de borde suave de pincel
+            brushCtx.shadowColor = 'black';
+        }
+
+        window.addEventListener('resize', resizeBrushCanvas);
+        resizeBrushCanvas();
+
+        function startDrawing(e) {
+            isDrawing = true;
+            // Ocultar el texto de ayuda al primer toque
+            gsap.to(hint, {opacity: 0, duration: 0.5});
+            
+            const rect = brushCanvas.getBoundingClientRect();
+            lastX = (e.clientX || e.touches[0].clientX) - rect.left;
+            lastY = (e.clientY || e.touches[0].clientY) - rect.top;
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            e.preventDefault(); // Evitar scroll al pintar en móvil
+
+            const rect = brushCanvas.getBoundingClientRect();
+            const currentX = (e.clientX || e.touches[0].clientX) - rect.left;
+            const currentY = (e.clientY || e.touches[0].clientY) - rect.top;
+
+            brushCtx.beginPath();
+            brushCtx.moveTo(lastX, lastY);
+            brushCtx.lineTo(currentX, currentY);
+            brushCtx.stroke();
+
+            lastX = currentX;
+            lastY = currentY;
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        // Eventos Mouse
+        brushCanvas.addEventListener('mousedown', startDrawing);
+        brushCanvas.addEventListener('mousemove', draw);
+        brushCanvas.addEventListener('mouseup', stopDrawing);
+        brushCanvas.addEventListener('mouseout', stopDrawing);
+
+        // Eventos Táctiles (Móvil)
+        brushCanvas.addEventListener('touchstart', startDrawing, {passive: false});
+        brushCanvas.addEventListener('touchmove', draw, {passive: false});
+        brushCanvas.addEventListener('touchend', stopDrawing);
+
     </script>
 </body>
 </html>
