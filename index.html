@@ -93,7 +93,7 @@
         /* Preloader */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background-color: #0F3B2F; z-index: 9998;
+            background: linear-gradient(135deg, #1F4D40, #0F3B2F, #051611); z-index: 9998;
             display: flex; justify-content: center; align-items: center;
         }
         .logo-svg {
@@ -139,15 +139,15 @@
             position: relative;
             width: 100%;
             height: 400px; /* Base height for the picture */
-            border: 20px solid #2a2a2a; /* Outer dark border */
+            border: 20px solid #333; /* Outer slightly lighter dark border */
             box-sizing: border-box;
             box-shadow: 
-                0 30px 60px -12px rgba(0, 0, 0, 0.8), /* Global shadow */
-                inset 0 0 15px rgba(0,0,0,0.8), /* Inner shadow of the frame */
-                0 0 5px rgba(200, 169, 126, 0.3); /* Subtle gold glow */
-            border-image: linear-gradient(to bottom right, #b8860b, #ffd700, #daa520, #8b6508) 1;
-            /* Creating a classic multi-layered frame look */
-            background: #111;
+                0 30px 60px -10px rgba(0, 0, 0, 0.7), /* Global shadow */
+                inset 0 0 20px rgba(0,0,0,0.6), /* Inner shadow of the frame */
+                0 0 15px rgba(220, 195, 150, 0.4); /* Elegant champagne glow */
+            border-image: linear-gradient(to bottom right, #e8d0a9, #c8a97e, #b89766, #d8c09a) 1;
+            /* Creating a classic multi-layered frame look with lighter champagne colors */
+            background: #1a1a1a;
             padding: 15px; /* Inner passepartout */
         }
         
@@ -347,7 +347,7 @@
                 </div>
             </section>
 
-            <section id="archivo" class="py-32 bg-gradient-to-b from-[#1a1a1a] to-[#050505] text-beige overflow-hidden">
+            <section id="archivo" class="py-32 bg-gradient-to-br from-emerald via-forest to-[#051611] text-beige overflow-hidden">
                 <div class="px-8 md:px-24 mb-16 flex justify-between items-end">
                     <h2 class="font-serif text-5xl md:text-7xl">Colección<br><span class="italic text-champagne">Permanente</span></h2>
                     <p class="font-sans text-sm tracking-widest uppercase hidden md:block">Desliza para explorar</p>
@@ -525,6 +525,75 @@
                                 <span class="text-champagne font-serif text-4xl md:text-6xl italic">2025</span>
                                 <h3 class="font-sans text-2xl md:text-4xl font-light mt-2 tracking-widest">MoMA, New York</h3>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="servicios" class="relative py-32 bg-beige text-forest overflow-hidden">
+                <div class="text-center z-10 relative mb-16 px-4">
+                    <p class="font-sans text-forest text-xs tracking-[0.3em] uppercase mb-4 reveal-text">Nuestro Trabajo</p>
+                    <h2 class="font-serif text-5xl md:text-7xl text-forest reveal-text">Servicios</h2>
+                </div>
+
+                <div class="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+                    <!-- Servicio 1 -->
+                    <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl hover:-translate-y-2 transition-transform duration-500 cursor-pointer">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop" alt="Retratos personalizados" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        </div>
+                        <div class="p-8 absolute bottom-0 w-full text-white">
+                            <h3 class="font-serif text-2xl mb-2 text-champagne">Retratos personalizados</h3>
+                            <p class="font-sans text-sm font-light opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0">Capturamos la esencia y la emoción en cada trazo, creando recuerdos invaluables que perduran en el tiempo.</p>
+                        </div>
+                    </div>
+
+                    <!-- Servicio 2 -->
+                    <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl hover:-translate-y-2 transition-transform duration-500 cursor-pointer">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1578301978018-3005759f48f7?q=80&w=800&auto=format&fit=crop" alt="Cuadros por encargo" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        </div>
+                        <div class="p-8 absolute bottom-0 w-full text-white">
+                            <h3 class="font-serif text-2xl mb-2 text-champagne">Cuadros por encargo</h3>
+                            <p class="font-sans text-sm font-light opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0">Obras únicas creadas a medida para complementar perfectamente tus espacios y reflejar tu estilo personal.</p>
+                        </div>
+                    </div>
+
+                    <!-- Servicio 3 -->
+                    <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl hover:-translate-y-2 transition-transform duration-500 cursor-pointer">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800&auto=format&fit=crop" alt="Clases de pintura" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        </div>
+                        <div class="p-8 absolute bottom-0 w-full text-white">
+                            <h3 class="font-serif text-2xl mb-2 text-champagne">Clases de pintura</h3>
+                            <p class="font-sans text-sm font-light opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0">Desarrolla tu técnica y encuentra tu voz artística bajo la guía de maestros experimentados en nuestro estudio.</p>
+                        </div>
+                    </div>
+
+                    <!-- Servicio 4 -->
+                    <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl hover:-translate-y-2 transition-transform duration-500 cursor-pointer lg:col-start-1 lg:col-end-2 lg:translate-x-[50%]">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1580136608260-4eb11f4b24fe?q=80&w=800&auto=format&fit=crop" alt="Restauración de arte" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        </div>
+                        <div class="p-8 absolute bottom-0 w-full text-white">
+                            <h3 class="font-serif text-2xl mb-2 text-champagne">Restauración de arte</h3>
+                            <p class="font-sans text-sm font-light opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0">Devolvemos la vida a piezas históricas con técnicas de conservación de la más alta calidad.</p>
+                        </div>
+                    </div>
+
+                    <!-- Servicio 5 -->
+                    <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl hover:-translate-y-2 transition-transform duration-500 cursor-pointer lg:col-start-2 lg:col-end-3 lg:translate-x-[50%]">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?q=80&w=800&auto=format&fit=crop" alt="Talleres artísticos" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        </div>
+                        <div class="p-8 absolute bottom-0 w-full text-white">
+                            <h3 class="font-serif text-2xl mb-2 text-champagne">Talleres artísticos</h3>
+                            <p class="font-sans text-sm font-light opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0">Sesiones inmersivas donde exploramos diferentes técnicas, materiales y movimientos artísticos en comunidad.</p>
                         </div>
                     </div>
                 </div>
