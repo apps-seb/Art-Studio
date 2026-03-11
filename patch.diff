@@ -1,0 +1,174 @@
+--- index.html
++++ index.html
+@@ -88,6 +88,18 @@
+         .brush-container { position: relative; cursor: crosshair; }
+         .brush-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; touch-action: none; }
++
++        /* Ruleta 3D */
++        .ruleta-bg-container { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
++        .ruleta-bg { position: absolute; inset: 0; background-size: cover; background-position: center; filter: brightness(0.6) grayscale(30%); transition: opacity 1s ease; }
++        .ruleta-bg-overlay { position: absolute; inset: 0; background-color: rgba(15, 59, 47, 0.7); mix-blend-mode: multiply; }
++        .swiper-ruleta { width: 100%; height: 100vh; padding-top: 20vh; padding-bottom: 20vh; z-index: 10; }
++        .swiper-slide-ruleta { width: 300px; height: 420px; background-color: #EAE5DF; border-radius: 12px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); display: flex; flex-direction: column; transition: filter 0.5s ease; filter: brightness(0.5); border: 1px solid rgba(200, 169, 126, 0.3); }
++        .swiper-slide-ruleta-active { filter: brightness(1); border-color: #C8A97E; }
++        .ruleta-img-wrapper { height: 70%; overflow: hidden; }
++        .ruleta-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
++        .ruleta-info { height: 30%; padding: 20px; display: flex; flex-direction: column; justify-content: center; background-color: #0F3B2F; color: #EAE5DF; text-align: center; }
+     </style>
+ </head>
+ <body class="antialiased font-sans selection:bg-champagne selection:text-forest">
+@@ -235,6 +247,45 @@
+                 </div>
+             </section>
+
++            <section id="ruleta" class="relative w-full h-screen overflow-hidden flex items-center bg-forest">
++                <div class="ruleta-bg-container" id="ruleta-bg-container">
++                    <!-- Imágenes de fondo dinámicas -->
++                </div>
++                <div class="ruleta-bg-overlay"></div>
++
++                <div class="absolute top-16 left-8 md:left-24 z-20 pointer-events-none">
++                    <p class="font-sans text-champagne text-xs tracking-[0.3em] uppercase mb-4">Colección Rotativa</p>
++                    <h2 class="font-serif text-5xl md:text-7xl text-beige overflow-hidden">
++                        <span class="block translate-y-[100%] ruleta-title-anim" id="ruleta-title">Obra Principal</span>
++                    </h2>
++                    <p class="font-sans text-sm tracking-widest text-champagne mt-4 uppercase opacity-0 ruleta-author-anim" id="ruleta-author">Autor Desconocido</p>
++                </div>
++
++                <div class="w-full md:w-1/2 ml-auto h-full relative z-10 flex items-center justify-center">
++                    <div class="swiper swiper-ruleta cursor-swiper">
++                        <div class="swiper-wrapper" id="ruleta-wrapper">
++                            <!-- Las tarjetas se generarán dinámicamente -->
++                        </div>
++                    </div>
++                </div>
++                <div class="absolute bottom-16 left-8 md:left-24 z-20 flex gap-4">
++                    <button class="w-12 h-12 rounded-full border border-champagne text-champagne flex items-center justify-center hover:bg-champagne hover:text-forest transition-colors hover-target ruleta-prev pointer-events-auto cursor-pointer relative z-30">
++                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
++                    </button>
++                    <button class="w-12 h-12 rounded-full border border-champagne text-champagne flex items-center justify-center hover:bg-champagne hover:text-forest transition-colors hover-target ruleta-next pointer-events-auto cursor-pointer relative z-30">
++                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
++                    </button>
++                </div>
++            </section>
++
+             <section class="relative py-32 bg-beige text-forest perspective-container overflow-hidden">
+                 <div class="text-center z-10 relative mb-24 px-4">
+                     <p class="font-sans text-champagne text-xs tracking-[0.3em] uppercase mb-4 reveal-text">Trayectoria</p>
+@@ -321,6 +372,99 @@
+         const exCards = gsap.utils.toArray('.exhibition-card');
+         exCards.forEach((card, i) => {
+             if (i === exCards.length - 1) return;
+             gsap.to(card, { scale: 0.85, opacity: 0, rotationX: -15, transformOrigin: "top center", ease: "none", scrollTrigger: { trigger: exCards[i + 1], start: "top 80%", end: "top 20%", scrub: true } });
+         });
+
++        // ==========================================
++        // 6. RULETA 3D ANIMADA
++        // ==========================================
++        const ruletaData = [
++            { id: 1, title: 'Geometría Rota', author: 'Elena Vals', image: 'https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?q=80&w=800&auto=format&fit=crop', year: '2023' },
++            { id: 2, title: 'Azul Profundo', author: 'Marco Rossi', image: 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?q=80&w=800&auto=format&fit=crop', year: '2021' },
++            { id: 3, title: 'Luz Fragmentada', author: 'Sarah Jin', image: 'https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=800&auto=format&fit=crop', year: '2024' },
++            { id: 4, title: 'Caos Estructurado', author: 'David Chen', image: 'https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?q=80&w=800&auto=format&fit=crop', year: '2022' },
++            { id: 5, title: 'Sueño Etéreo', author: 'Ana Silva', image: 'https://images.unsplash.com/photo-1536924940846-227afb31e2a5?q=80&w=800&auto=format&fit=crop', year: '2023' }
++        ];
++
++        const ruletaWrapper = document.getElementById('ruleta-wrapper');
++        const ruletaBgContainer = document.getElementById('ruleta-bg-container');
++        const ruletaTitle = document.getElementById('ruleta-title');
++        const ruletaAuthor = document.getElementById('ruleta-author');
++
++        // Generar HTML dinámicamente
++        ruletaData.forEach((item, index) => {
++            // Backgrounds para revelado circular
++            const bgDiv = document.createElement('div');
++            bgDiv.className = 'ruleta-bg';
++            bgDiv.style.backgroundImage = `url(${item.image})`;
++            bgDiv.style.opacity = index === 0 ? '1' : '0';
++            bgDiv.style.zIndex = ruletaData.length - index;
++            bgDiv.id = `ruleta-bg-${index}`;
++            ruletaBgContainer.appendChild(bgDiv);
++
++            // Slides de la Ruleta (Swiper)
++            const slide = document.createElement('div');
++            slide.className = 'swiper-slide swiper-slide-ruleta';
++            slide.innerHTML = `
++                <div class="ruleta-img-wrapper">
++                    <img src="${item.image}" alt="${item.title}">
++                </div>
++                <div class="ruleta-info">
++                    <h4 class="font-serif text-2xl text-champagne italic">${item.title}</h4>
++                    <p class="font-sans text-xs tracking-widest mt-2 uppercase">${item.year}</p>
++                </div>
++            `;
++            ruletaWrapper.appendChild(slide);
++        });
++
++        let currentRuletaIndex = -1; // Iniciamos en -1 para forzar la actualización en init
++
++        const swiperRuleta = new Swiper('.swiper-ruleta', {
++            direction: 'vertical',
++            effect: 'coverflow',
++            grabCursor: true,
++            centeredSlides: true,
++            slidesPerView: 'auto',
++            loop: true,
++            speed: 1000,
++            coverflowEffect: { rotate: 20, stretch: 0, depth: 300, modifier: 1, slideShadows: false },
++            autoplay: { delay: 5000, disableOnInteraction: false },
++            navigation: { nextEl: '.ruleta-next', prevEl: '.ruleta-prev' },
++            slideActiveClass: 'swiper-slide-ruleta-active',
++            on: {
++                init: function() { updateRuletaInfo(this.realIndex, true); },
++                slideChangeTransitionStart: function() { updateRuletaInfo(this.realIndex, false); }
++            }
++        });
++
++        function updateRuletaInfo(index, isInit) {
++            if (currentRuletaIndex === index) return;
++
++            const prevIndex = currentRuletaIndex;
++            currentRuletaIndex = index;
++            const data = ruletaData[index];
++
++            // Animar Textos
++            gsap.to('.ruleta-title-anim', { y: '-100%', duration: 0.4, ease: "power2.in", onComplete: () => {
++                ruletaTitle.textContent = data.title;
++                gsap.fromTo('.ruleta-title-anim', { y: '100%' }, { y: '0%', duration: 0.6, ease: "power3.out" });
++            }});
++
++            gsap.to('.ruleta-author-anim', { opacity: 0, y: -10, duration: 0.4, onComplete: () => {
++                ruletaAuthor.textContent = data.author;
++                gsap.fromTo('.ruleta-author-anim', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", delay: 0.2 });
++            }});
++
++            // Animar Fondo con Clip-Path revelador (Efecto Premium)
++            if (!isInit && prevIndex !== -1) {
++                const nextBg = document.getElementById(`ruleta-bg-${index}`);
++                const currentBgs = document.querySelectorAll('.ruleta-bg');
++
++                // Reordenar z-index
++                currentBgs.forEach((bg, i) => {
++                    if (i !== index && i !== prevIndex) {
++                        bg.style.zIndex = 1;
++                        bg.style.opacity = 0;
++                    }
++                });
++
++                const prevBg = document.getElementById(`ruleta-bg-${prevIndex}`);
++                if(prevBg) prevBg.style.zIndex = 2;
++
++                nextBg.style.zIndex = 3;
++                nextBg.style.opacity = 1;
++
++                // Animación de clip-path desde el centro (Efecto Ruleta Reveal)
++                gsap.fromTo(nextBg,
++                    { clipPath: 'circle(0% at 50% 50%)', filter: 'brightness(1) grayscale(0%)' },
++                    { clipPath: 'circle(150% at 50% 50%)', filter: 'brightness(0.6) grayscale(30%)', duration: 1.5, ease: "power3.inOut" }
++                );
++            }
++        }
++
+         // ==========================================
+         // 5. LÓGICA DEL LIENZO: PINCELADAS TÁCTILES
+         // ==========================================
