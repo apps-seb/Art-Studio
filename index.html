@@ -117,6 +117,56 @@
         }
         .swiper-slide-active .art-info { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
 
+        /* Swiper Archivo Continuo / Permanente */
+        .swiper-archivo { width: 100%; padding-top: 50px; padding-bottom: 50px; overflow: hidden; }
+        .swiper-slide-archivo {
+            width: 320px;
+            height: 480px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            background-color: #EAE5DF;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s ease;
+        }
+        @media (min-width: 768px) {
+            .swiper-slide-archivo {
+                width: 450px;
+                height: 550px;
+            }
+        }
+        .swiper-slide-archivo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            inset: 0;
+            transition: transform 1s ease;
+        }
+        .swiper-slide-archivo-active img {
+            transform: scale(1.05);
+        }
+        .archivo-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            transform: translateY(100%);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            color: #fff;
+        }
+        .swiper-slide-active .archivo-info {
+            transform: translateY(0);
+            opacity: 1;
+            transition-delay: 0.2s;
+        }
+
         /* 3D Stacking Cards (Exposiciones) */
         .perspective-container { perspective: 1500px; }
         .exhibition-card { position: sticky; top: 15vh; will-change: transform, opacity; }
@@ -224,57 +274,96 @@
                 </div>
             </section>
 
-            <section id="archivo" class="py-32 bg-forest text-beige overflow-hidden">
+            <section id="archivo" class="py-32 bg-gradient-to-b from-forest to-[#051611] text-beige overflow-hidden">
                 <div class="px-8 md:px-24 mb-16 flex justify-between items-end">
-                    <h2 class="font-serif text-5xl md:text-7xl">Archivo<br><span class="italic text-champagne">Continuo</span></h2>
+                    <h2 class="font-serif text-5xl md:text-7xl">Colección<br><span class="italic text-champagne">Permanente</span></h2>
                     <p class="font-sans text-sm tracking-widest uppercase hidden md:block">Desliza para explorar</p>
                 </div>
 
-                <div class="flex overflow-x-auto gap-4 md:gap-8 px-8 md:px-24 pb-12 snap-x snap-mandatory no-scrollbar cursor-gallery">
-                    
-                    <div class="flex-none w-[85vw] md:w-[35vw] h-[60vh] md:h-[70vh] relative group snap-center rounded-xl overflow-hidden">
-                        <img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=800&auto=format&fit=crop" alt="Obra">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                            <span class="text-champagne font-serif text-4xl italic">01</span>
-                            <span class="font-sans text-sm tracking-widest uppercase mt-2">Materia Oscura</span>
+                <div class="swiper swiper-archivo cursor-swiper mt-12 pb-16">
+                    <div class="swiper-wrapper">
+                        
+                        <div class="swiper-slide swiper-slide-archivo">
+                            <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=800&auto=format&fit=crop" alt="Materia Oscura">
+                            <div class="archivo-info">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-sans font-medium text-lg text-white">Materia Oscura</h3>
+                                    <span class="font-sans text-xs text-white/80">Octubre 2021</span>
+                                </div>
+                                <p class="font-sans text-sm text-white/90 mt-3 mb-4 leading-relaxed italic">"El vacío no es la ausencia de algo, sino la presencia potencial de todo."</p>
+                                <div class="font-sans text-[10px] text-white/70 tracking-widest uppercase space-y-1">
+                                    <p>Medio: Óleo sobre lienzo</p>
+                                    <p>Dimensiones: 120 x 180 cm</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="flex-none w-[85vw] md:w-[35vw] h-[60vh] md:h-[70vh] relative group snap-center rounded-xl overflow-hidden">
-                        <img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=800&auto=format&fit=crop" alt="Obra">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                            <span class="text-champagne font-serif text-4xl italic">02</span>
-                            <span class="font-sans text-sm tracking-widest uppercase mt-2">Eco de Luz</span>
+                        <div class="swiper-slide swiper-slide-archivo">
+                            <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=800&auto=format&fit=crop" alt="Eco de Luz">
+                            <div class="archivo-info">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-sans font-medium text-lg text-white">Eco de Luz</h3>
+                                    <span class="font-sans text-xs text-white/80">Enero 2022</span>
+                                </div>
+                                <p class="font-sans text-sm text-white/90 mt-3 mb-4 leading-relaxed italic">"La luz que se refracta en la memoria perdura más allá del tiempo visible."</p>
+                                <div class="font-sans text-[10px] text-white/70 tracking-widest uppercase space-y-1">
+                                    <p>Medio: Acrílico y resina</p>
+                                    <p>Dimensiones: 90 x 90 cm</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="flex-none w-[85vw] md:w-[35vw] h-[60vh] md:h-[70vh] relative group snap-center rounded-xl overflow-hidden">
-                        <img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=800&auto=format&fit=crop" alt="Obra">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                            <span class="text-champagne font-serif text-4xl italic">03</span>
-                            <span class="font-sans text-sm tracking-widest uppercase mt-2">Líneas de Éter</span>
+                        <div class="swiper-slide swiper-slide-archivo">
+                            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=800&auto=format&fit=crop" alt="Líneas de Éter">
+                            <div class="archivo-info">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-sans font-medium text-lg text-white">Líneas de Éter</h3>
+                                    <span class="font-sans text-xs text-white/80">Marzo 2023</span>
+                                </div>
+                                <p class="font-sans text-sm text-white/90 mt-3 mb-4 leading-relaxed italic">"Trazar una línea es separar el infinito en dos mitades complementarias."</p>
+                                <div class="font-sans text-[10px] text-white/70 tracking-widest uppercase space-y-1">
+                                    <p>Medio: Carbón y grafito</p>
+                                    <p>Dimensiones: 150 x 200 cm</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="flex-none w-[85vw] md:w-[35vw] h-[60vh] md:h-[70vh] relative group snap-center rounded-xl overflow-hidden">
-                        <img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://images.unsplash.com/photo-1583088580009-2d947c3e90a6?q=80&w=800&auto=format&fit=crop" alt="Obra">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                            <span class="text-champagne font-serif text-4xl italic">04</span>
-                            <span class="font-sans text-sm tracking-widest uppercase mt-2">Fluido Dorado</span>
+                        <div class="swiper-slide swiper-slide-archivo">
+                            <img src="https://images.unsplash.com/photo-1583088580009-2d947c3e90a6?q=80&w=800&auto=format&fit=crop" alt="Fluido Dorado">
+                            <div class="archivo-info">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-sans font-medium text-lg text-white">Fluido Dorado</h3>
+                                    <span class="font-sans text-xs text-white/80">Julio 2023</span>
+                                </div>
+                                <p class="font-sans text-sm text-white/90 mt-3 mb-4 leading-relaxed italic">"La transformación de la materia es el alquimia visual de nuestro siglo."</p>
+                                <div class="font-sans text-[10px] text-white/70 tracking-widest uppercase space-y-1">
+                                    <p>Medio: Pigmentos mixtos con pan de oro</p>
+                                    <p>Dimensiones: 100 x 120 cm</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="flex-none w-[85vw] md:w-[35vw] h-[60vh] md:h-[70vh] relative group snap-center rounded-xl overflow-hidden">
-                        <img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?q=80&w=800&auto=format&fit=crop" alt="Obra">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                            <span class="text-champagne font-serif text-4xl italic">05</span>
-                            <span class="font-sans text-sm tracking-widest uppercase mt-2">Pigmento Crudo</span>
+                        <div class="swiper-slide swiper-slide-archivo">
+                            <img src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?q=80&w=800&auto=format&fit=crop" alt="Pigmento Crudo">
+                            <div class="archivo-info">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-sans font-medium text-lg text-white">Pigmento Crudo</h3>
+                                    <span class="font-sans text-xs text-white/80">Noviembre 2023</span>
+                                </div>
+                                <p class="font-sans text-sm text-white/90 mt-3 mb-4 leading-relaxed italic">"Regresar al origen del color es despojarse de la interpretación moderna."</p>
+                                <div class="font-sans text-[10px] text-white/70 tracking-widest uppercase space-y-1">
+                                    <p>Medio: Tierras naturales sobre lino</p>
+                                    <p>Dimensiones: 140 x 140 cm</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <!-- Navigation / Pagination if needed -->
+                    <div class="swiper-pagination mt-8 relative"></div>
                 </div>
             </section>
 
-            <section id="destacados" class="relative py-32 bg-[#0a2820] overflow-hidden">
+            <section id="destacados" class="relative py-32 bg-gradient-to-b from-[#051611] to-[#0a2820] overflow-hidden">
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-champagne rounded-full blur-[150px] opacity-10 pointer-events-none"></div>
 
                 <div class="text-center z-10 relative mb-16 px-4">
@@ -345,7 +434,7 @@
 
                 <div class="max-w-5xl mx-auto px-4 relative pb-[10vh]">
                     <div class="exhibition-card mb-[10vh]">
-                        <div class="exhibition-inner w-full h-[60vh] md:h-[70vh] rounded-3xl overflow-hidden shadow-2xl bg-forest relative flex flex-col justify-end p-8 md:p-16 hover-target cursor-gallery">
+                        <div class="exhibition-inner w-full h-[60vh] md:h-[70vh] rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-forest to-[#051611] relative flex flex-col justify-end p-8 md:p-16 hover-target cursor-gallery">
                             <img src="https://images.unsplash.com/photo-1577083552431-6e5fd01988ec?q=80&w=1200&auto=format&fit=crop" alt="Bienal" class="absolute inset-0 w-full h-full object-cover opacity-60 exhibition-img">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
                             <div class="relative z-10 exhibition-content text-beige">
@@ -356,7 +445,7 @@
                     </div>
 
                     <div class="exhibition-card">
-                        <div class="exhibition-inner w-full h-[60vh] md:h-[70vh] rounded-3xl overflow-hidden shadow-2xl bg-forest relative flex flex-col justify-end p-8 md:p-16 hover-target cursor-gallery">
+                        <div class="exhibition-inner w-full h-[60vh] md:h-[70vh] rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-forest to-[#051611] relative flex flex-col justify-end p-8 md:p-16 hover-target cursor-gallery">
                             <img src="https://images.unsplash.com/photo-1561214115-f1f11538638b?q=80&w=1200&auto=format&fit=crop" alt="MoMA" class="absolute inset-0 w-full h-full object-cover opacity-60 exhibition-img">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
                             <div class="relative z-10 exhibition-content text-beige">
@@ -368,7 +457,7 @@
                 </div>
             </section>
 
-            <footer id="contacto" class="py-32 px-8 md:px-24 bg-forest text-beige relative overflow-hidden">
+            <footer id="contacto" class="py-32 px-8 md:px-24 bg-gradient-to-b from-forest to-[#051611] text-beige relative overflow-hidden">
                 <div class="max-w-4xl mx-auto text-center z-10 relative">
                     <h2 class="font-serif text-4xl md:text-6xl mb-12">Adquiere o comisiona una obra.</h2>
                     <form class="flex flex-col gap-8 max-w-xl mx-auto font-sans">
@@ -443,6 +532,42 @@
 
         // 4. Swiper 3D y Stacking Cards
         new Swiper('.swiper-destacados', { effect: 'coverflow', grabCursor: true, centeredSlides: true, slidesPerView: 'auto', loop: true, speed: 800, coverflowEffect: { rotate: 35, stretch: 0, depth: 250, modifier: 1, slideShadows: true }, autoplay: { delay: 4000, disableOnInteraction: false } });
+
+        // Swiper Archivo Continuo / Colección Permanente
+        new Swiper('.swiper-archivo', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            loop: true,
+            speed: 800,
+            coverflowEffect: {
+                rotate: 5,
+                stretch: 0,
+                depth: 100,
+                modifier: 2.5,
+                slideShadows: true
+            },
+            autoplay: {
+                delay: 3500,
+                disableOnInteraction: false
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true
+            },
+            breakpoints: {
+                768: {
+                    coverflowEffect: {
+                        rotate: 5,
+                        stretch: 0,
+                        depth: 150,
+                        modifier: 1.5,
+                        slideShadows: true
+                    }
+                }
+            }
+        });
         
         const exCards = gsap.utils.toArray('.exhibition-card');
         exCards.forEach((card, i) => {
