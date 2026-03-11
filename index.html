@@ -11,6 +11,8 @@
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -530,88 +532,181 @@
                 </div>
             </section>
 
-            <section id="servicios" class="relative py-32 bg-beige text-forest overflow-hidden">
-                <div class="text-center z-10 relative mb-16 px-4">
-                    <p class="font-sans text-forest text-xs tracking-[0.3em] uppercase mb-4 reveal-text">Nuestro Trabajo</p>
-                    <h2 class="font-serif text-5xl md:text-7xl text-forest reveal-text">Servicios</h2>
+            <section id="servicios" class="relative py-32 bg-gradient-to-b from-forest via-emerald to-elegant text-beige overflow-hidden">
+                <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23c8a97e\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+
+                <div class="text-center z-10 relative mb-20 px-4">
+                    <p class="font-sans text-champagne text-xs tracking-[0.4em] uppercase mb-4 reveal-text">Exclusividad & Maestría</p>
+                    <h2 class="font-serif text-5xl md:text-7xl text-white reveal-text mb-6">Nuestros Servicios Premium</h2>
+                    <p class="font-sans text-white/80 max-w-2xl mx-auto font-light leading-relaxed">Elevamos el arte a su máxima expresión. Ofrecemos soluciones artísticas de élite, diseñadas a medida para coleccionistas, espacios de lujo y amantes del buen gusto.</p>
                 </div>
 
-                <div class="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
-                    <!-- Servicio 1 -->
-                    <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl hover:-translate-y-2 transition-transform duration-500 cursor-pointer">
-                        <div class="h-64 overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop" alt="Retratos personalizados" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                        </div>
-                        <div class="p-8 absolute bottom-0 w-full text-white">
-                            <h3 class="font-serif text-2xl mb-2 text-champagne">Retratos personalizados</h3>
-                            <p class="font-sans text-sm font-light opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0">Capturamos la esencia y la emoción en cada trazo, creando recuerdos invaluables que perduran en el tiempo.</p>
-                        </div>
-                    </div>
-
-                    <!-- Servicio 2 -->
-                    <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl hover:-translate-y-2 transition-transform duration-500 cursor-pointer">
-                        <div class="h-64 overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1578301978018-3005759f48f7?q=80&w=800&auto=format&fit=crop" alt="Cuadros por encargo" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                        </div>
-                        <div class="p-8 absolute bottom-0 w-full text-white">
-                            <h3 class="font-serif text-2xl mb-2 text-champagne">Cuadros por encargo</h3>
-                            <p class="font-sans text-sm font-light opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0">Obras únicas creadas a medida para complementar perfectamente tus espacios y reflejar tu estilo personal.</p>
+                <div class="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 relative z-10">
+                    <!-- Servicio 1 Premium -->
+                    <div class="group relative rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md overflow-hidden hover:bg-white/10 transition-all duration-500 hover:border-champagne/50 hover:shadow-[0_0_40px_rgba(200,169,126,0.15)] cursor-pointer">
+                        <div class="p-10 flex flex-col h-full relative z-10">
+                            <div class="w-16 h-16 rounded-full bg-champagne/10 flex items-center justify-center mb-8 group-hover:bg-champagne/20 transition-colors duration-500 border border-champagne/30">
+                                <i class="ph ph-paint-brush-broad text-3xl text-champagne"></i>
+                            </div>
+                            <h3 class="font-serif text-3xl mb-4 text-white group-hover:text-champagne transition-colors duration-300">Retratos de Autor</h3>
+                            <p class="font-sans text-sm font-light text-white/70 leading-relaxed mb-6 flex-grow">Plasmar el alma humana requiere más que técnica; exige visión. Creamos retratos excepcionales que capturan la esencia del retratado, convirtiendo cada trazo en un legado atemporal.</p>
+                            <div class="flex items-center text-champagne font-sans text-xs tracking-widest uppercase mt-auto opacity-70 group-hover:opacity-100 transition-opacity">
+                                <span>Solicitar presupuesto</span>
+                                <i class="ph ph-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Servicio 3 -->
-                    <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl hover:-translate-y-2 transition-transform duration-500 cursor-pointer">
-                        <div class="h-64 overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800&auto=format&fit=crop" alt="Clases de pintura" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                        </div>
-                        <div class="p-8 absolute bottom-0 w-full text-white">
-                            <h3 class="font-serif text-2xl mb-2 text-champagne">Clases de pintura</h3>
-                            <p class="font-sans text-sm font-light opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0">Desarrolla tu técnica y encuentra tu voz artística bajo la guía de maestros experimentados en nuestro estudio.</p>
-                        </div>
-                    </div>
-
-                    <!-- Servicio 4 -->
-                    <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl hover:-translate-y-2 transition-transform duration-500 cursor-pointer lg:col-start-1 lg:col-end-2 lg:translate-x-[50%]">
-                        <div class="h-64 overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1580136608260-4eb11f4b24fe?q=80&w=800&auto=format&fit=crop" alt="Restauración de arte" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                        </div>
-                        <div class="p-8 absolute bottom-0 w-full text-white">
-                            <h3 class="font-serif text-2xl mb-2 text-champagne">Restauración de arte</h3>
-                            <p class="font-sans text-sm font-light opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0">Devolvemos la vida a piezas históricas con técnicas de conservación de la más alta calidad.</p>
+                    <!-- Servicio 2 Premium -->
+                    <div class="group relative rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md overflow-hidden hover:bg-white/10 transition-all duration-500 hover:border-champagne/50 hover:shadow-[0_0_40px_rgba(200,169,126,0.15)] cursor-pointer mt-0 md:mt-10 lg:mt-0">
+                        <div class="p-10 flex flex-col h-full relative z-10">
+                            <div class="w-16 h-16 rounded-full bg-champagne/10 flex items-center justify-center mb-8 group-hover:bg-champagne/20 transition-colors duration-500 border border-champagne/30">
+                                <i class="ph ph-palette text-3xl text-champagne"></i>
+                            </div>
+                            <h3 class="font-serif text-3xl mb-4 text-white group-hover:text-champagne transition-colors duration-300">Obras por Encargo</h3>
+                            <p class="font-sans text-sm font-light text-white/70 leading-relaxed mb-6 flex-grow">Concebimos piezas únicas destinadas a ser el punto focal de espacios sofisticados. Una obra maestra creada exclusivamente para dialogar con su entorno y su sensibilidad.</p>
+                            <div class="flex items-center text-champagne font-sans text-xs tracking-widest uppercase mt-auto opacity-70 group-hover:opacity-100 transition-opacity">
+                                <span>Consultar viabilidad</span>
+                                <i class="ph ph-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Servicio 5 -->
-                    <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl hover:-translate-y-2 transition-transform duration-500 cursor-pointer lg:col-start-2 lg:col-end-3 lg:translate-x-[50%]">
-                        <div class="h-64 overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?q=80&w=800&auto=format&fit=crop" alt="Talleres artísticos" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <!-- Servicio 3 Premium -->
+                    <div class="group relative rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md overflow-hidden hover:bg-white/10 transition-all duration-500 hover:border-champagne/50 hover:shadow-[0_0_40px_rgba(200,169,126,0.15)] cursor-pointer">
+                        <div class="p-10 flex flex-col h-full relative z-10">
+                            <div class="w-16 h-16 rounded-full bg-champagne/10 flex items-center justify-center mb-8 group-hover:bg-champagne/20 transition-colors duration-500 border border-champagne/30">
+                                <i class="ph ph-chalkboard-teacher text-3xl text-champagne"></i>
+                            </div>
+                            <h3 class="font-serif text-3xl mb-4 text-white group-hover:text-champagne transition-colors duration-300">Clases Magistrales</h3>
+                            <p class="font-sans text-sm font-light text-white/70 leading-relaxed mb-6 flex-grow">Mentoría artística de élite. Compartimos secretos de estudio, técnicas clásicas y visión contemporánea en sesiones exclusivas diseñadas para elevar su potencial artístico.</p>
+                            <div class="flex items-center text-champagne font-sans text-xs tracking-widest uppercase mt-auto opacity-70 group-hover:opacity-100 transition-opacity">
+                                <span>Ver disponibilidad</span>
+                                <i class="ph ph-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                            </div>
                         </div>
-                        <div class="p-8 absolute bottom-0 w-full text-white">
-                            <h3 class="font-serif text-2xl mb-2 text-champagne">Talleres artísticos</h3>
-                            <p class="font-sans text-sm font-light opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0">Sesiones inmersivas donde exploramos diferentes técnicas, materiales y movimientos artísticos en comunidad.</p>
+                    </div>
+
+                    <!-- Servicio 4 Premium -->
+                    <div class="group relative rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md overflow-hidden hover:bg-white/10 transition-all duration-500 hover:border-champagne/50 hover:shadow-[0_0_40px_rgba(200,169,126,0.15)] cursor-pointer lg:col-start-1 lg:col-end-2 lg:translate-x-[50%] md:mt-10 lg:mt-0">
+                        <div class="p-10 flex flex-col h-full relative z-10">
+                            <div class="w-16 h-16 rounded-full bg-champagne/10 flex items-center justify-center mb-8 group-hover:bg-champagne/20 transition-colors duration-500 border border-champagne/30">
+                                <i class="ph ph-magic-wand text-3xl text-champagne"></i>
+                            </div>
+                            <h3 class="font-serif text-3xl mb-4 text-white group-hover:text-champagne transition-colors duration-300">Restauración Fina</h3>
+                            <p class="font-sans text-sm font-light text-white/70 leading-relaxed mb-6 flex-grow">Preservamos el patrimonio artístico con rigor científico y sensibilidad histórica. Devolvemos el esplendor a obras clásicas garantizando su conservación para generaciones futuras.</p>
+                            <div class="flex items-center text-champagne font-sans text-xs tracking-widest uppercase mt-auto opacity-70 group-hover:opacity-100 transition-opacity">
+                                <span>Agendar evaluación</span>
+                                <i class="ph ph-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Servicio 5 Premium -->
+                    <div class="group relative rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md overflow-hidden hover:bg-white/10 transition-all duration-500 hover:border-champagne/50 hover:shadow-[0_0_40px_rgba(200,169,126,0.15)] cursor-pointer lg:col-start-2 lg:col-end-3 lg:translate-x-[50%] mt-0 md:mt-10 lg:mt-0">
+                        <div class="p-10 flex flex-col h-full relative z-10">
+                            <div class="w-16 h-16 rounded-full bg-champagne/10 flex items-center justify-center mb-8 group-hover:bg-champagne/20 transition-colors duration-500 border border-champagne/30">
+                                <i class="ph ph-users-three text-3xl text-champagne"></i>
+                            </div>
+                            <h3 class="font-serif text-3xl mb-4 text-white group-hover:text-champagne transition-colors duration-300">Retiros Artísticos</h3>
+                            <p class="font-sans text-sm font-light text-white/70 leading-relaxed mb-6 flex-grow">Experiencias inmersivas premium donde la creatividad fluye en entornos inspiradores. Retiros diseñados para reconectar con el arte, el lujo y la inspiración más profunda.</p>
+                            <div class="flex items-center text-champagne font-sans text-xs tracking-widest uppercase mt-auto opacity-70 group-hover:opacity-100 transition-opacity">
+                                <span>Descubrir próximos retiros</span>
+                                <i class="ph ph-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <footer id="contacto" class="py-32 px-8 md:px-24 bg-gradient-to-b from-[#1a1a1a] to-[#050505] text-beige relative overflow-hidden">
+            <section id="contacto" class="py-32 px-8 md:px-24 bg-gradient-to-b from-forest to-emerald text-beige relative overflow-hidden">
                 <div class="max-w-4xl mx-auto text-center z-10 relative">
                     <h2 class="font-serif text-4xl md:text-6xl mb-12">Adquiere o comisiona una obra.</h2>
                     <form class="flex flex-col gap-8 max-w-xl mx-auto font-sans">
-                        <input type="text" placeholder="Tu Nombre" class="bg-transparent border-b border-elegant pb-4 focus:outline-none focus:border-champagne transition-colors text-beige placeholder-elegant text-sm tracking-widest">
-                        <input type="email" placeholder="Tu Email" class="bg-transparent border-b border-elegant pb-4 focus:outline-none focus:border-champagne transition-colors text-beige placeholder-elegant text-sm tracking-widest">
-                        <button type="submit" class="self-start mt-8 font-serif text-2xl italic hover:text-champagne transition-colors flex items-center gap-4 hover-target">
-                            Enviar Mensaje <span class="block w-12 h-[1px] bg-champagne"></span>
+                        <input type="text" placeholder="Tu Nombre" class="bg-transparent border-b border-champagne/30 pb-4 focus:outline-none focus:border-champagne transition-colors text-beige placeholder-champagne/50 text-sm tracking-widest">
+                        <input type="email" placeholder="Tu Email" class="bg-transparent border-b border-champagne/30 pb-4 focus:outline-none focus:border-champagne transition-colors text-beige placeholder-champagne/50 text-sm tracking-widest">
+                        <button type="submit" class="self-center mt-8 font-serif text-2xl italic hover:text-champagne transition-colors flex items-center gap-4 hover-target">
+                            Enviar Mensaje <i class="ph ph-arrow-right text-champagne ml-2"></i>
                         </button>
                     </form>
                 </div>
-                
-                <div class="absolute -bottom-10 left-0 w-full text-center opacity-5 pointer-events-none select-none">
+            </section>
+
+            <!-- Footer Premium -->
+            <footer class="bg-elegant text-beige pt-20 pb-10 border-t border-champagne/20 relative overflow-hidden">
+                <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23c8a97e\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                        <!-- Branding -->
+                        <div class="col-span-1 md:col-span-2 lg:col-span-1">
+                            <a href="#" class="font-serif text-3xl tracking-wider text-champagne mb-6 inline-block">+Art<span class="font-sans text-xl font-light tracking-widest ml-2 text-white/80">STUDIO</span></a>
+                            <p class="font-sans text-sm font-light text-white/60 leading-relaxed mb-8">Elevando el arte contemporáneo a través de la exclusividad, la maestría técnica y una visión estética sin compromisos.</p>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 rounded-full border border-champagne/30 flex items-center justify-center text-champagne hover:bg-champagne hover:text-forest transition-colors duration-300">
+                                    <i class="ph ph-instagram-logo text-lg"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full border border-champagne/30 flex items-center justify-center text-champagne hover:bg-champagne hover:text-forest transition-colors duration-300">
+                                    <i class="ph ph-pinterest-logo text-lg"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full border border-champagne/30 flex items-center justify-center text-champagne hover:bg-champagne hover:text-forest transition-colors duration-300">
+                                    <i class="ph ph-twitter-logo text-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Explorar -->
+                        <div>
+                            <h4 class="font-sans text-xs tracking-[0.2em] uppercase text-champagne mb-6 font-medium">Explorar</h4>
+                            <ul class="space-y-3 font-sans text-sm font-light text-white/70">
+                                <li><a href="#galeria" class="hover:text-champagne transition-colors duration-300 flex items-center"><i class="ph ph-caret-right mr-2 text-champagne/50"></i>Galería Exclusiva</a></li>
+                                <li><a href="#exposiciones" class="hover:text-champagne transition-colors duration-300 flex items-center"><i class="ph ph-caret-right mr-2 text-champagne/50"></i>Exposiciones</a></li>
+                                <li><a href="#archivo" class="hover:text-champagne transition-colors duration-300 flex items-center"><i class="ph ph-caret-right mr-2 text-champagne/50"></i>Colección Privada</a></li>
+                                <li><a href="#servicios" class="hover:text-champagne transition-colors duration-300 flex items-center"><i class="ph ph-caret-right mr-2 text-champagne/50"></i>Servicios Premium</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Servicios -->
+                        <div>
+                            <h4 class="font-sans text-xs tracking-[0.2em] uppercase text-champagne mb-6 font-medium">Especialidades</h4>
+                            <ul class="space-y-3 font-sans text-sm font-light text-white/70">
+                                <li><a href="#" class="hover:text-champagne transition-colors duration-300 flex items-center"><i class="ph ph-caret-right mr-2 text-champagne/50"></i>Retratos de Autor</a></li>
+                                <li><a href="#" class="hover:text-champagne transition-colors duration-300 flex items-center"><i class="ph ph-caret-right mr-2 text-champagne/50"></i>Obras por Encargo</a></li>
+                                <li><a href="#" class="hover:text-champagne transition-colors duration-300 flex items-center"><i class="ph ph-caret-right mr-2 text-champagne/50"></i>Restauración Fina</a></li>
+                                <li><a href="#" class="hover:text-champagne transition-colors duration-300 flex items-center"><i class="ph ph-caret-right mr-2 text-champagne/50"></i>Asesoría de Arte</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Contacto -->
+                        <div>
+                            <h4 class="font-sans text-xs tracking-[0.2em] uppercase text-champagne mb-6 font-medium">Contacto</h4>
+                            <ul class="space-y-4 font-sans text-sm font-light text-white/70">
+                                <li class="flex items-start">
+                                    <i class="ph ph-map-pin text-champagne mt-1 mr-3 text-lg"></i>
+                                    <span>Calle del Arte Contemporáneo, 42<br>Madrid, España 28001</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="ph ph-phone text-champagne mr-3 text-lg"></i>
+                                    <a href="tel:+34912345678" class="hover:text-champagne transition-colors duration-300">+34 91 234 5678</a>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="ph ph-envelope-simple text-champagne mr-3 text-lg"></i>
+                                    <a href="mailto:info@plusartstudio.com" class="hover:text-champagne transition-colors duration-300">info@plusartstudio.com</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Footer -->
+                    <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center font-sans text-xs font-light text-white/50">
+                        <p>&copy; 2024 +Art Studio. Todos los derechos reservados.</p>
+                        <div class="flex space-x-6 mt-4 md:mt-0">
+                            <a href="#" class="hover:text-champagne transition-colors duration-300">Aviso Legal</a>
+                            <a href="#" class="hover:text-champagne transition-colors duration-300">Política de Privacidad</a>
+                            <a href="#" class="hover:text-champagne transition-colors duration-300">Términos de Servicio</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute -bottom-10 left-0 w-full text-center opacity-5 pointer-events-none select-none z-0">
                     <h1 class="font-serif text-[15vw] leading-none whitespace-nowrap">+ART STUDIO</h1>
                 </div>
             </footer>
