@@ -133,11 +133,15 @@
         .ruleta-bg { position: absolute; inset: 0; background-size: cover; background-position: center; filter: brightness(0.6) grayscale(30%); transition: opacity 1s ease; }
         .ruleta-bg-overlay { position: absolute; inset: 0; background-color: rgba(15, 59, 47, 0.7); mix-blend-mode: multiply; }
         .swiper-ruleta { width: 100%; height: 100vh; padding-top: 20vh; padding-bottom: 20vh; z-index: 10; }
-        .swiper-slide-ruleta { width: 300px; height: 420px; background-color: #EAE5DF; border-radius: 12px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); display: flex; flex-direction: column; transition: filter 0.5s ease; filter: brightness(0.5); border: 1px solid rgba(200, 169, 126, 0.3); }
-        .swiper-slide-ruleta-active { filter: brightness(1); border-color: #C8A97E; }
-        .ruleta-img-wrapper { height: 70%; overflow: hidden; }
-        .ruleta-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-        .ruleta-info { height: 30%; padding: 20px; display: flex; flex-direction: column; justify-content: center; background-color: #0F3B2F; color: #EAE5DF; text-align: center; }
+        .swiper-slide-ruleta { width: 220px; height: 320px; background-color: #EAE5DF; border-radius: 12px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); display: flex; flex-direction: column; transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); filter: brightness(0.4) blur(4px); border: 1px solid rgba(200, 169, 126, 0.1); transform: scale(0.9); }
+        @media (min-width: 768px) {
+            .swiper-slide-ruleta { width: 280px; height: 400px; }
+        }
+        .swiper-slide-ruleta-active { filter: brightness(1) blur(0px); border-color: rgba(200, 169, 126, 0.6); transform: scale(1); box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.7); }
+        .ruleta-img-wrapper { height: 75%; overflow: hidden; position: relative; }
+        .ruleta-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+        .swiper-slide-ruleta-active .ruleta-img-wrapper img { transform: scale(1.05); }
+        .ruleta-info { height: 25%; padding: 12px 16px; display: flex; flex-direction: column; justify-content: center; background-color: #0F3B2F; color: #EAE5DF; text-align: center; }
     </style>
 </head>
 <body class="antialiased font-sans selection:bg-champagne selection:text-forest">
@@ -322,10 +326,10 @@
                 </div>
                 <div class="absolute bottom-16 left-8 md:left-24 z-20 flex gap-4">
                     <button class="w-12 h-12 rounded-full border border-champagne text-champagne flex items-center justify-center hover:bg-champagne hover:text-forest transition-colors hover-target ruleta-prev pointer-events-auto cursor-pointer relative z-30">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                     </button>
                     <button class="w-12 h-12 rounded-full border border-champagne text-champagne flex items-center justify-center hover:bg-champagne hover:text-forest transition-colors hover-target ruleta-next pointer-events-auto cursor-pointer relative z-30">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </button>
                 </div>
             </section>
@@ -478,8 +482,8 @@
                     <img src="${item.image}" alt="${item.title}">
                 </div>
                 <div class="ruleta-info">
-                    <h4 class="font-serif text-2xl text-champagne italic">${item.title}</h4>
-                    <p class="font-sans text-xs tracking-widest mt-2 uppercase">${item.year}</p>
+                    <h4 class="font-serif text-lg md:text-xl text-champagne italic">${item.title}</h4>
+                    <p class="font-sans text-[10px] md:text-xs tracking-widest mt-1 md:mt-2 uppercase opacity-80">${item.year}</p>
                 </div>
             `;
             ruletaWrapper.appendChild(slide);
@@ -488,14 +492,14 @@
         let currentRuletaIndex = -1; // Iniciamos en -1 para forzar la actualización en init
 
         const swiperRuleta = new Swiper('.swiper-ruleta', {
-            direction: 'vertical',
+            direction: 'horizontal',
             effect: 'coverflow',
             grabCursor: true,
             centeredSlides: true,
             slidesPerView: 'auto',
             loop: true,
             speed: 1000,
-            coverflowEffect: { rotate: 20, stretch: 0, depth: 300, modifier: 1, slideShadows: false },
+            coverflowEffect: { rotate: 5, stretch: 0, depth: 150, modifier: 1, slideShadows: false },
             autoplay: { delay: 5000, disableOnInteraction: false },
             navigation: { nextEl: '.ruleta-next', prevEl: '.ruleta-prev' },
             slideActiveClass: 'swiper-slide-ruleta-active',
