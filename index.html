@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -35,10 +37,9 @@
             background-color: #EAE5DF; /* beige */
             color: #0F3B2F; /* forest */
             overflow-x: hidden;
-            cursor: none; /* Ocultamos el cursor nativo para usar uno custom */
+            cursor: none;
         }
         
-        /* Ocultar scrollbar nativo para más elegancia */
         ::-webkit-scrollbar {
             display: none;
         }
@@ -69,7 +70,7 @@
         }
         
         .cursor-hover::after {
-            content: 'Ver';
+            content: var(--cursor-text, 'Ver');
             font-family: 'Inter', sans-serif;
             font-size: 12px;
             color: #0F3B2F;
@@ -77,7 +78,7 @@
             opacity: 1;
         }
 
-        /* Utilidades de imagen */
+        /* Utilidades de imagen general */
         .img-wrap {
             overflow: hidden;
         }
@@ -114,6 +115,52 @@
             stroke-dasharray: 600;
             stroke-dashoffset: 600;
         }
+
+        /* Estilos para la Galería 3D Premium (Swiper) */
+        .swiper-destacados {
+            width: 100%;
+            padding-top: 50px;
+            padding-bottom: 120px;
+            overflow: visible;
+        }
+
+        .swiper-slide-art {
+            background-position: center;
+            background-size: cover;
+            width: 280px; 
+            height: 400px;
+            -webkit-box-reflect: below 5px linear-gradient(transparent, transparent, rgba(0,0,0,0.3));
+            transition: filter 0.5s ease;
+            filter: grayscale(80%) brightness(0.5);
+        }
+
+        @media (min-width: 768px) {
+            .swiper-slide-art {
+                width: 450px;
+                height: 600px;
+            }
+        }
+
+        .swiper-slide-active {
+            filter: grayscale(0%) brightness(1);
+        }
+
+        .art-info {
+            position: absolute;
+            bottom: -90px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .swiper-slide-active .art-info {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.3s;
+        }
     </style>
 </head>
 <body class="antialiased font-sans selection:bg-champagne selection:text-forest">
@@ -131,6 +178,7 @@
         <div class="font-serif text-2xl tracking-widest">+ART</div>
         <div class="text-sm font-sans uppercase tracking-widest space-x-8 hidden md:block hover-target">
             <a href="#estudio" class="hover:text-champagne transition-colors">Estudio</a>
+            <a href="#destacados" class="hover:text-champagne transition-colors">Maestras</a>
             <a href="#coleccion" class="hover:text-champagne transition-colors">Colección</a>
             <a href="#contacto" class="hover:text-champagne transition-colors">Contacto</a>
         </div>
@@ -174,6 +222,50 @@
                 </div>
                 <div class="w-full md:w-1/2 relative h-[600px] img-wrap parallax-container">
                     <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=1000&auto=format&fit=crop" alt="Arte Escultórico" class="parallax-img">
+                </div>
+            </section>
+
+            <section id="destacados" class="relative py-32 bg-[#0a2820] overflow-hidden">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-champagne rounded-full blur-[150px] opacity-10 pointer-events-none"></div>
+
+                <div class="text-center z-10 relative mb-16 px-4">
+                    <p class="font-sans text-champagne text-xs tracking-[0.3em] uppercase mb-4 reveal-text">Exhibición Privada</p>
+                    <h2 class="font-serif text-5xl md:text-7xl text-beige reveal-text">Obras Maestras</h2>
+                </div>
+
+                <div class="swiper swiper-destacados cursor-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide swiper-slide-art shadow-2xl" style="background-image: url('https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?q=80&w=800&auto=format&fit=crop');">
+                            <div class="art-info">
+                                <h3 class="font-serif text-3xl text-champagne">Génesis Verde</h3>
+                                <p class="font-sans text-xs tracking-widest text-beige mt-2 uppercase">Acrílico sobre lienzo</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide swiper-slide-art shadow-2xl" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop');">
+                            <div class="art-info">
+                                <h3 class="font-serif text-3xl text-champagne">Textura Abisal</h3>
+                                <p class="font-sans text-xs tracking-widest text-beige mt-2 uppercase">Óleo e hilos de oro</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide swiper-slide-art shadow-2xl" style="background-image: url('https://images.unsplash.com/photo-1579783483458-83d02161294e?q=80&w=800&auto=format&fit=crop');">
+                            <div class="art-info">
+                                <h3 class="font-serif text-3xl text-champagne">Silencio Áureo</h3>
+                                <p class="font-sans text-xs tracking-widest text-beige mt-2 uppercase">Técnica mixta</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide swiper-slide-art shadow-2xl" style="background-image: url('https://images.unsplash.com/photo-1557672172-298e090bd0f1?q=80&w=800&auto=format&fit=crop');">
+                            <div class="art-info">
+                                <h3 class="font-serif text-3xl text-champagne">Fractal</h3>
+                                <p class="font-sans text-xs tracking-widest text-beige mt-2 uppercase">Escultura digital</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide swiper-slide-art shadow-2xl" style="background-image: url('https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?q=80&w=800&auto=format&fit=crop');">
+                            <div class="art-info">
+                                <h3 class="font-serif text-3xl text-champagne">Resonancia</h3>
+                                <p class="font-sans text-xs tracking-widest text-beige mt-2 uppercase">Pigmentos naturales</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -248,12 +340,12 @@
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-        // Registrar ScrollTrigger
         gsap.registerPlugin(ScrollTrigger);
 
-        // 1. Inicializar Lenis (Smooth Scroll)
+        // 1. Smooth Scroll (Lenis)
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -266,17 +358,15 @@
         }
         requestAnimationFrame(raf);
 
-        // Integrar Lenis con ScrollTrigger
         lenis.on('scroll', ScrollTrigger.update);
         gsap.ticker.add((time)=>{
           lenis.raf(time * 1000);
         });
         gsap.ticker.lagSmoothing(0);
 
-        // 2. Lógica del Custom Cursor
+        // 2. Custom Cursor Dinámico
         const cursor = document.getElementById('cursor');
-        const galleryItems = document.querySelectorAll('.cursor-gallery');
-        const hoverTargets = document.querySelectorAll('.hover-target, a, button');
+        const root = document.documentElement;
 
         document.addEventListener('mousemove', (e) => {
             gsap.to(cursor, {
@@ -287,12 +377,26 @@
             });
         });
 
-        galleryItems.forEach(item => {
-            item.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
+        // Hover en la Galería Normal (Texto: "Ver")
+        document.querySelectorAll('.cursor-gallery').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                root.style.setProperty('--cursor-text', '"Ver"');
+                cursor.classList.add('cursor-hover');
+            });
             item.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
         });
 
-        hoverTargets.forEach(item => {
+        // Hover en Swiper 3D (Texto: "Girar")
+        document.querySelectorAll('.cursor-swiper').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                root.style.setProperty('--cursor-text', '"Girar"');
+                cursor.classList.add('cursor-hover');
+            });
+            item.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
+        });
+
+        // Hover en Enlaces y Botones (Agrandar sin texto)
+        document.querySelectorAll('.hover-target, a, button').forEach(item => {
             item.addEventListener('mouseenter', () => {
                 gsap.to(cursor, {scale: 1.5, duration: 0.3});
             });
@@ -301,25 +405,19 @@
             });
         });
 
-        // 3. Animación Preloader & Carga Inicial
+        // 3. Preloader Animation
         window.addEventListener('load', () => {
             const tl = gsap.timeline();
-
-            // Dibujar SVG
             tl.to('.logo-svg', { strokeDashoffset: 0, duration: 2, ease: "power2.inOut" })
               .to('#logo-text', { opacity: 1, duration: 1, ease: "power1.inOut" }, "-=0.5")
-              // Ocultar preloader
               .to('#preloader', { yPercent: -100, duration: 1.2, ease: "expo.inOut", delay: 0.5 })
-              // Animar Hero Text
               .to('.title-anim span', { y: 0, duration: 1.2, stagger: 0.2, ease: "power4.out" }, "-=0.5")
-              // Animar subtítulo y línea de scroll
               .to('.fade-anim', { opacity: 1, duration: 1, ease: "power2.out" }, "-=0.8")
               .to('.anim-line', { y: "100%", duration: 2, repeat: -1, ease: "power2.inOut" }, "-=1");
         });
 
-        // 4. Animaciones de Scroll (El Manifiesto)
-        const revealTexts = document.querySelectorAll('.reveal-text');
-        revealTexts.forEach(text => {
+        // 4. Animaciones de Scroll (Textos y Parallax)
+        document.querySelectorAll('.reveal-text').forEach(text => {
             gsap.fromTo(text, 
                 { opacity: 0, y: 30 },
                 {
@@ -332,7 +430,6 @@
             );
         });
 
-        // Efecto Parallax en la imagen del Manifiesto
         gsap.to('.parallax-img', {
             yPercent: 20,
             ease: "none",
@@ -344,9 +441,8 @@
             }
         });
 
-        // 5. Gallery Reveal Animación
-        const galleryReveal = gsap.utils.toArray('.gallery-item');
-        galleryReveal.forEach((item, i) => {
+        // 5. Gallery Reveal
+        gsap.utils.toArray('.gallery-item').forEach((item) => {
             gsap.fromTo(item, 
                 { opacity: 0, y: 100, clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)' },
                 {
@@ -361,6 +457,27 @@
                     }
                 }
             );
+        });
+
+        // 6. Configuración de Swiper 3D Coverflow
+        const swiper = new Swiper('.swiper-destacados', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            loop: true,
+            speed: 800,
+            coverflowEffect: {
+                rotate: 35,
+                stretch: 0,
+                depth: 250,
+                modifier: 1,
+                slideShadows: true,
+            },
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            }
         });
     </script>
 </body>
