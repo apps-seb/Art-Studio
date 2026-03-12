@@ -8,8 +8,8 @@ def take_screenshots():
 
         # Go to the local server
         page.goto('http://localhost:3000')
-        page.wait_for_load_state('networkidle')
-        time.sleep(2) # let gsap initialize
+        page.wait_for_load_state('domcontentloaded')
+        time.sleep(5) # let gsap initialize and images load
 
         # Scroll down to the #about-studio section
         # Find the bounding box to scroll exactly to its top
