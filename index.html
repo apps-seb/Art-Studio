@@ -198,6 +198,16 @@
             transform: translateY(10px) translateZ(30px);
             transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
         }
+
+        /* Text Glow Animation */
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 5px rgba(200, 169, 126, 0.2), 0 0 10px rgba(200, 169, 126, 0.2); }
+            50% { text-shadow: 0 0 10px rgba(200, 169, 126, 0.6), 0 0 20px rgba(200, 169, 126, 0.4), 0 0 30px rgba(200, 169, 126, 0.2); }
+            100% { text-shadow: 0 0 5px rgba(200, 169, 126, 0.2), 0 0 10px rgba(200, 169, 126, 0.2); }
+        }
+        .glow-text {
+            animation: textGlow 3s ease-in-out infinite;
+        }
         
         .swiper-slide-active .archivo-info-elegante {
             opacity: 1;
@@ -348,7 +358,7 @@
                         <!-- Texto 1 -->
                         <div class="absolute inset-0 flex flex-col justify-center about-text-item about-text-1">
                             <p class="font-sans text-champagne text-[10px] md:text-xs tracking-[0.4em] uppercase mb-2 md:mb-4">La Esencia</p>
-                            <h2 class="font-serif text-3xl md:text-6xl text-white mb-4 md:mb-6 leading-tight">¿Qué es <span class="italic text-champagne">+Art Studio?</span></h2>
+                            <h2 class="font-serif text-4xl md:text-7xl text-white mb-4 md:mb-6 leading-tight">¿Qué es <span class="italic text-champagne glow-text">+Art Studio?</span></h2>
                             <p class="font-sans text-white/80 text-sm md:text-xl font-light leading-relaxed">
                                 Somos más que una galería; somos un santuario para el arte contemporáneo. Un espacio curado donde la vanguardia estética se encuentra con la tradición técnica. +Art Studio nace con el propósito de redefinir la relación entre el espectador y la obra.
                             </p>
@@ -356,7 +366,7 @@
                         <!-- Texto 2 -->
                         <div class="absolute inset-0 flex flex-col justify-center about-text-item about-text-2 opacity-0 translate-y-10">
                             <p class="font-sans text-champagne text-[10px] md:text-xs tracking-[0.4em] uppercase mb-2 md:mb-4">Nuestro Criterio</p>
-                            <h2 class="font-serif text-3xl md:text-6xl text-white mb-4 md:mb-6 leading-tight">Curaduría de <span class="italic text-champagne">Excelencia</span></h2>
+                            <h2 class="font-serif text-4xl md:text-7xl text-white mb-4 md:mb-6 leading-tight">Curaduría de <span class="italic text-champagne glow-text">Excelencia</span></h2>
                             <p class="font-sans text-white/80 text-sm md:text-xl font-light leading-relaxed">
                                 Lo que nos hace verdaderamente especiales es nuestra implacable búsqueda de la calidad. Seleccionamos rigurosamente cada pieza, no por su valor comercial, sino por su capacidad de conmover, desafiar e inspirar. Representamos artistas que dominan el silencio visual.
                             </p>
@@ -364,7 +374,7 @@
                         <!-- Texto 3 -->
                         <div class="absolute inset-0 flex flex-col justify-center about-text-item about-text-3 opacity-0 translate-y-10">
                             <p class="font-sans text-champagne text-[10px] md:text-xs tracking-[0.4em] uppercase mb-2 md:mb-4">La Experiencia</p>
-                            <h2 class="font-serif text-3xl md:text-6xl text-white mb-4 md:mb-6 leading-tight">El Arte de <span class="italic text-champagne">Coleccionar</span></h2>
+                            <h2 class="font-serif text-4xl md:text-7xl text-white mb-4 md:mb-6 leading-tight">El Arte de <span class="italic text-champagne glow-text">Coleccionar</span></h2>
                             <p class="font-sans text-white/80 text-sm md:text-xl font-light leading-relaxed">
                                 Brindamos una asesoría íntima y personalizada. Entendemos que adquirir arte es un acto profundamente personal. En +Art Studio, te guiamos en el descubrimiento de piezas que no solo enriquecen tus espacios, sino que se convierten en parte de tu legado.
                             </p>
@@ -374,35 +384,35 @@
                     <!-- Tarjetas 3D apiladas -->
                     <div class="w-full md:w-1/2 h-[45vh] md:h-[70vh] relative perspective-container z-20 about-cards-container mb-8 md:mb-0">
                         <!-- Tarjeta 3 (Fondo) -->
-                        <div class="about-card about-card-3 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] md:w-[500px] h-[180px] md:h-[280px] bg-beige p-3 md:p-4 rounded-xl shadow-2xl border border-black/5 flex flex-row items-center gap-4 mirror-reflect">
-                            <div class="w-1/2 h-full relative overflow-hidden rounded-lg">
+                        <div class="about-card about-card-3 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] md:w-[500px] h-[220px] md:h-[320px] bg-beige p-3 md:p-4 rounded-xl shadow-2xl border border-black/5 flex flex-col items-center gap-4 mirror-reflect">
+                            <div class="w-full h-[120px] md:h-[180px] relative overflow-hidden rounded-lg">
                                 <img src="https://images.unsplash.com/photo-1549887552-cb1071d3e5ca?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Obra 3">
                             </div>
-                            <div class="w-1/2 text-left">
+                            <div class="w-full text-center">
                                 <h3 class="font-serif text-lg md:text-3xl text-forest">Síntesis</h3>
-                                <p class="font-sans text-[10px] md:text-xs text-elegant tracking-widest uppercase mt-2">Carbón sobre papel</p>
+                                <p class="font-sans text-[10px] md:text-xs text-elegant tracking-widest uppercase mt-1 md:mt-2">Carbón sobre papel</p>
                             </div>
                         </div>
 
                         <!-- Tarjeta 2 (Medio) -->
-                        <div class="about-card about-card-2 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] md:w-[500px] h-[180px] md:h-[280px] bg-beige p-3 md:p-4 rounded-xl shadow-2xl border border-black/5 flex flex-row items-center gap-4 mirror-reflect">
-                            <div class="w-1/2 h-full relative overflow-hidden rounded-lg">
+                        <div class="about-card about-card-2 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] md:w-[500px] h-[220px] md:h-[320px] bg-beige p-3 md:p-4 rounded-xl shadow-2xl border border-black/5 flex flex-col items-center gap-4 mirror-reflect">
+                            <div class="w-full h-[120px] md:h-[180px] relative overflow-hidden rounded-lg">
                                 <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Obra 2">
                             </div>
-                            <div class="w-1/2 text-left">
+                            <div class="w-full text-center">
                                 <h3 class="font-serif text-lg md:text-3xl text-forest">Dualidad</h3>
-                                <p class="font-sans text-[10px] md:text-xs text-elegant tracking-widest uppercase mt-2">Óleo e hilos</p>
+                                <p class="font-sans text-[10px] md:text-xs text-elegant tracking-widest uppercase mt-1 md:mt-2">Óleo e hilos</p>
                             </div>
                         </div>
 
                         <!-- Tarjeta 1 (Frente) -->
-                        <div class="about-card about-card-1 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] md:w-[500px] h-[180px] md:h-[280px] bg-beige p-3 md:p-4 rounded-xl shadow-2xl border border-black/5 flex flex-row items-center gap-4 mirror-reflect">
-                            <div class="w-1/2 h-full relative overflow-hidden rounded-lg">
+                        <div class="about-card about-card-1 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] md:w-[500px] h-[220px] md:h-[320px] bg-beige p-3 md:p-4 rounded-xl shadow-2xl border border-black/5 flex flex-col items-center gap-4 mirror-reflect">
+                            <div class="w-full h-[120px] md:h-[180px] relative overflow-hidden rounded-lg">
                                 <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Obra 1">
                             </div>
-                            <div class="w-1/2 text-left">
+                            <div class="w-full text-center">
                                 <h3 class="font-serif text-lg md:text-3xl text-forest">Perspectiva</h3>
-                                <p class="font-sans text-[10px] md:text-xs text-elegant tracking-widest uppercase mt-2">Acrílico sobre lienzo</p>
+                                <p class="font-sans text-[10px] md:text-xs text-elegant tracking-widest uppercase mt-1 md:mt-2">Acrílico sobre lienzo</p>
                             </div>
                         </div>
                     </div>
