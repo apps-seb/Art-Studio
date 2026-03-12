@@ -42,6 +42,12 @@
             overflow-x: hidden;
             cursor: none;
         }
+
+        @media (max-width: 768px) {
+            body {
+                zoom: 0.5;
+            }
+        }
         
         /* Ocultar barra de scroll nativa */
         ::-webkit-scrollbar {
@@ -816,8 +822,17 @@
         // 2. Cursor Custom
         const cursor = document.getElementById('cursor');
         const root = document.documentElement;
+
+        function getZoomRatio() {
+            if (window.innerWidth <= 768) {
+                return 0.5;
+            }
+            return 1;
+        }
+
         document.addEventListener('mousemove', (e) => {
-            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1, ease: "power2.out" });
+            const zoom = getZoomRatio();
+            gsap.to(cursor, { x: e.clientX / zoom, y: e.clientY / zoom, duration: 0.1, ease: "power2.out" });
         });
 
         const setupHover = (selector, text, scale) => {
@@ -1105,8 +1120,13 @@
             gsap.to(hint, {opacity: 0, duration: 0.5});
             
             const rect = brushCanvas.getBoundingClientRect();
-            lastX = (e.clientX || e.touches[0].clientX) - rect.left;
-            lastY = (e.clientY || e.touches[0].clientY) - rect.top;
+            const zoom = getZoomRatio();
+
+            const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+            const clientY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
+
+            lastX = (clientX / zoom) - (rect.left / zoom);
+            lastY = (clientY / zoom) - (rect.top / zoom);
         }
 
         function draw(e) {
@@ -1114,8 +1134,13 @@
             e.preventDefault(); // Evitar scroll al pintar en móvil
 
             const rect = brushCanvas.getBoundingClientRect();
-            const currentX = (e.clientX || e.touches[0].clientX) - rect.left;
-            const currentY = (e.clientY || e.touches[0].clientY) - rect.top;
+            const zoom = getZoomRatio();
+
+            const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+            const clientY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
+
+            const currentX = (clientX / zoom) - (rect.left / zoom);
+            const currentY = (clientY / zoom) - (rect.top / zoom);
 
             brushCtx.beginPath();
             brushCtx.moveTo(lastX, lastY);
