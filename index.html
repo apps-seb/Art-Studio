@@ -264,6 +264,17 @@
         .exhibition-img { transform: translateZ(-50px) scale(1.1); }
         .exhibition-content { transform: translateZ(80px); }
 
+        /* Tarjetas 3D GSAP Scroll */
+        .perspective-2000 {
+            perspective: 2000px;
+        }
+        .cards-container-3d {
+            transform-style: preserve-3d;
+        }
+        .card-3d {
+            transform-style: preserve-3d;
+        }
+
         /* Lienzo Canvas (Pinceladas) */
         .brush-container { position: relative; cursor: crosshair; }
         .brush-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; touch-action: none; }
@@ -547,35 +558,60 @@
                 </div>
             </section>
 
-            <section id="destacados" class="relative py-32 bg-gradient-to-b from-[#051611] to-[#0a2820] overflow-hidden">
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-champagne rounded-full blur-[150px] opacity-10 pointer-events-none"></div>
+            <section id="galeria-3d" class="relative w-full h-screen bg-gradient-to-b from-[#051611] to-[#0a2820] overflow-hidden flex items-center justify-center perspective-2000">
+                <div class="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-champagne/10 via-transparent to-transparent opacity-50 pointer-events-none"></div>
 
-                <div class="text-center z-10 relative mb-16 px-4">
-                    <p class="font-sans text-champagne text-xs tracking-[0.3em] uppercase mb-4 reveal-text">Exhibición Privada</p>
-                    <h2 class="font-serif text-5xl md:text-7xl text-beige reveal-text">Obras Maestras 3D</h2>
+                <div class="text-center absolute top-16 w-full z-20 px-4">
+                    <p class="font-sans text-champagne text-xs tracking-[0.3em] uppercase mb-4 reveal-text">Experiencia Inmersiva</p>
+                    <h2 class="font-serif text-5xl md:text-7xl text-beige reveal-text">Descenso al Vacío</h2>
                 </div>
 
-                <div class="swiper swiper-destacados cursor-swiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide swiper-slide-art shadow-2xl" style="background-image: url('https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?q=80&w=800&auto=format&fit=crop');">
-                            <div class="art-info">
-                                <h3 class="font-serif text-3xl text-champagne">Génesis Verde</h3>
-                                <p class="font-sans text-xs tracking-widest text-beige mt-2 uppercase">Acrílico sobre lienzo</p>
-                            </div>
+                <!-- Tarjetas 3D Apiladas -->
+                <div class="relative w-full max-w-md md:max-w-2xl h-[500px] md:h-[650px] mt-16 z-10 cards-container-3d">
+
+                    <!-- Tarjeta 1 (Frente) -->
+                    <div class="card-3d absolute inset-0 w-full h-full rounded-2xl shadow-2xl overflow-hidden bg-[#1a1a1a] border border-champagne/20 flex flex-col items-center justify-center p-6 text-center will-change-transform z-30" id="card3d-1">
+                        <div class="w-full h-3/4 overflow-hidden rounded-xl mb-4 relative">
+                            <img src="https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?q=80&w=800&auto=format&fit=crop" alt="Cuadro 1" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                         </div>
-                        <div class="swiper-slide swiper-slide-art shadow-2xl" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop');">
-                            <div class="art-info">
-                                <h3 class="font-serif text-3xl text-champagne">Textura Abisal</h3>
-                                <p class="font-sans text-xs tracking-widest text-beige mt-2 uppercase">Óleo e hilos de oro</p>
-                            </div>
-                        </div>
-                        <div class="swiper-slide swiper-slide-art shadow-2xl" style="background-image: url('https://images.unsplash.com/photo-1579783483458-83d02161294e?q=80&w=800&auto=format&fit=crop');">
-                            <div class="art-info">
-                                <h3 class="font-serif text-3xl text-champagne">Silencio Áureo</h3>
-                                <p class="font-sans text-xs tracking-widest text-beige mt-2 uppercase">Técnica mixta</p>
-                            </div>
+                        <div class="h-1/4 flex flex-col justify-center">
+                            <h3 class="font-serif text-3xl text-champagne mb-1">Génesis Verde</h3>
+                            <p class="font-sans text-xs tracking-widest text-beige/70 uppercase">El Origen del Vértigo</p>
+                            <p class="font-sans text-xs text-beige/50 mt-2 max-w-sm mx-auto">Acrílico y textura sobre lienzo, 150x200cm</p>
                         </div>
                     </div>
+
+                    <!-- Tarjeta 2 (Medio) -->
+                    <div class="card-3d absolute inset-0 w-full h-full rounded-2xl shadow-2xl overflow-hidden bg-[#151515] border border-champagne/10 flex flex-col items-center justify-center p-6 text-center will-change-transform z-20 opacity-0 transform-gpu" id="card3d-2">
+                        <div class="w-full h-3/4 overflow-hidden rounded-xl mb-4 relative">
+                            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="Cuadro 2" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        </div>
+                        <div class="h-1/4 flex flex-col justify-center">
+                            <h3 class="font-serif text-3xl text-champagne mb-1">Textura Abisal</h3>
+                            <p class="font-sans text-xs tracking-widest text-beige/70 uppercase">Profundidad Insondable</p>
+                            <p class="font-sans text-xs text-beige/50 mt-2 max-w-sm mx-auto">Óleo e hilos de oro, 120x160cm</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 3 (Fondo) -->
+                    <div class="card-3d absolute inset-0 w-full h-full rounded-2xl shadow-2xl overflow-hidden bg-[#101010] border border-champagne/5 flex flex-col items-center justify-center p-6 text-center will-change-transform z-10 opacity-0 transform-gpu" id="card3d-3">
+                        <div class="w-full h-3/4 overflow-hidden rounded-xl mb-4 relative">
+                            <img src="https://images.unsplash.com/photo-1579783483458-83d02161294e?q=80&w=800&auto=format&fit=crop" alt="Cuadro 3" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        </div>
+                        <div class="h-1/4 flex flex-col justify-center">
+                            <h3 class="font-serif text-3xl text-champagne mb-1">Silencio Áureo</h3>
+                            <p class="font-sans text-xs tracking-widest text-beige/70 uppercase">Resonancia del Vacío</p>
+                            <p class="font-sans text-xs text-beige/50 mt-2 max-w-sm mx-auto">Técnica mixta sobre panel, 100x100cm</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-20">
+                    <span class="text-xs uppercase tracking-widest mb-2 text-champagne/70">Scroll</span>
+                    <div class="w-[1px] h-8 bg-champagne/20"></div>
                 </div>
             </section>
 
@@ -942,6 +978,66 @@
             if (i === exCards.length - 1) return; 
             gsap.to(card, { scale: 0.85, opacity: 0, rotationX: -15, transformOrigin: "top center", ease: "none", scrollTrigger: { trigger: exCards[i + 1], start: "top 80%", end: "top 20%", scrub: true } });
         });
+
+        // 5. Animación GSAP de Tarjetas 3D (Descenso al Vacío)
+        const tl3d = gsap.timeline({
+            scrollTrigger: {
+                trigger: '#galeria-3d',
+                start: 'top top',
+                end: '+=300%', // Define la duración del scroll (más grande = más lento)
+                scrub: 1,      // Suavidad del scroll
+                pin: true,     // Ancla la sección mientras ocurre la animación
+            }
+        });
+
+        // Configuración inicial de las tarjetas
+        // Tarjeta 2
+        gsap.set('#card3d-2', { yPercent: 50, scale: 0.8, rotateX: -20, opacity: 0, z: -100 });
+        // Tarjeta 3
+        gsap.set('#card3d-3', { yPercent: 100, scale: 0.6, rotateX: -40, opacity: 0, z: -200 });
+
+        // Secuencia de animación
+        // Movimiento de la primera tarjeta y aparición de la segunda
+        tl3d.to('#card3d-1', {
+            yPercent: 100, // Baja
+            rotateX: 30,   // Gira hacia atrás
+            rotateZ: -5,
+            opacity: 0,
+            scale: 0.8,
+            duration: 1
+        }, 0)
+        .to('#card3d-2', {
+            yPercent: 0,
+            scale: 1,
+            rotateX: 0,
+            opacity: 1,
+            z: 0,
+            duration: 1
+        }, 0); // Ocurre simultáneamente con el paso anterior
+
+        // Movimiento de la segunda tarjeta y aparición de la tercera
+        tl3d.to('#card3d-2', {
+            yPercent: 100,
+            rotateX: 30,
+            rotateZ: 5,
+            opacity: 0,
+            scale: 0.8,
+            duration: 1
+        }, 1) // Comienza en el segundo "segundo" de la timeline
+        .to('#card3d-3', {
+            yPercent: 0,
+            scale: 1,
+            rotateX: 0,
+            opacity: 1,
+            z: 0,
+            duration: 1
+        }, 1);
+
+        // Retraso final para apreciar la última tarjeta antes de desanclar
+        tl3d.to('#card3d-3', {
+            duration: 0.5
+        }, 2);
+
 
         // ==========================================
         // 5. ABOUT STUDIO - ANIMACIÓN 3D SCROLL
